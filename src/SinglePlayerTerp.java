@@ -37,10 +37,12 @@ public class SinglePlayerTerp extends JComponent implements KeyListener{
     //screens
     final int MAIN = 0;
     final int MODE = 1;
+    final int HOWTO = 6;
     final int SLVL = 2;
     final int LVL1 = 3;
     final int LVL2 = 4;
     final int LVL3 = 5;
+    
     //images
     BufferedImage main = ImageHelper.loadImage("MainScreen.png");
     BufferedImage mode = ImageHelper.loadImage("Load Screen.png");
@@ -63,6 +65,7 @@ public class SinglePlayerTerp extends JComponent implements KeyListener{
     int speed = 5;
     boolean p1sjumping = false;
     boolean p1sinAir = false;
+    boolean p1inAirs = false;
     int camx = 0;
     int camy = 0;
     
@@ -72,6 +75,7 @@ public class SinglePlayerTerp extends JComponent implements KeyListener{
     boolean p1right = false;
     boolean p1sjump = false;
     int p1count = 5;
+    boolean p1nomove = false;
     
     //lvl 1
     Rectangle l1b1 = new Rectangle(100, 450, 100, 50);
@@ -82,7 +86,12 @@ public class SinglePlayerTerp extends JComponent implements KeyListener{
     Rectangle l1b6 = new Rectangle(950, 400, 300, 40);
     
     //lvl 2
-    
+    Rectangle l2b1 = new Rectangle(150, 250, 100, 50);
+    Rectangle l2b2 = new Rectangle(450, 450, 40, 40);
+    Rectangle l2b3 = new Rectangle(600, 400, 100, 10);
+    Rectangle l2b4 = new Rectangle(750, 150, 100, 10);
+    Rectangle l2b5 = new Rectangle(1000, 475, 40, 40);
+    Rectangle l2b6 = new Rectangle(1200, 400, 40, 40);
     
     //lvl 3
     
@@ -121,8 +130,18 @@ public class SinglePlayerTerp extends JComponent implements KeyListener{
         g.fillRect(l1b5.x - camx, l1b5.y, l1b5.width, l1b5.height);
         g.fillRect(l1b6.x - camx, l1b6.y, l1b6.width, l1b6.height);
         
-        
-        
+        }
+        if (screen == 4){
+        g.drawImage(background, 0, 0, null);
+        g.setColor(Color.RED);
+        g.fillRect(player1.x - camx, player1.y, player1.height, player1.width);    
+            
+        g.fillRect(l2b1.x - camx, l2b1.y, l2b1.width, l2b1.height);
+        g.fillRect(l2b2.x - camx, l2b2.y, l2b2.width, l2b2.height);
+        g.fillRect(l2b3.x - camx, l2b3.y, l2b3.width, l2b3.height);
+        g.fillRect(l2b4.x - camx, l2b4.y, l2b4.width, l2b4.height);
+        g.fillRect(l2b5.x - camx, l2b5.y, l2b5.width, l2b5.height);
+        g.fillRect(l2b6.x - camx, l2b6.y, l2b6.width, l2b6.height);
         }
         // GAME DRAWING ENDS HERE
     }
@@ -152,11 +171,18 @@ public class SinglePlayerTerp extends JComponent implements KeyListener{
             //screen logic\
             
             
-            if(screen == 3){
+            if(screen == 3){//players cant stall jump on level 1
                 p1sjump = false;
             }
-            
-            
+            String s = "";
+            if(screen == 1){
+                s = (String)JOptionPane.showInputDialog(null, "Please select a mode", "Mode", JOptionPane.QUESTION_MESSAGE, null, modeSelect, "Single Player");
+            }
+            if( s == modeSelect[0])
+            {
+                System.out.println("blah");
+            }
+   
             if(change){
                 if (screen == MAIN){
                     screen = MODE;
@@ -186,10 +212,10 @@ public class SinglePlayerTerp extends JComponent implements KeyListener{
              if (p1sjump){//player 1 sjumps
                 p1count = p1count - 1;
             }
-             if (p1right){//player 1 move right
+             if (p1right && !p1inAirs){//player 1 move right
                 player1.x = player1.x + speed;
             }
-            if(p1left){//player 1 move left
+            if(p1left && !p1inAirs){//player 1 move left
                 player1.x = player1.x - speed;
             }
             if (p1sjumpy > 0) {
@@ -200,6 +226,7 @@ public class SinglePlayerTerp extends JComponent implements KeyListener{
                 p1sjumping = false;
                 p1dy = -30;
                 p1inAir = true;
+                p1inAirs = false;
             }
             if (p1sjumping) {
                 p1dy = 0;
@@ -217,11 +244,16 @@ public class SinglePlayerTerp extends JComponent implements KeyListener{
                 p1dy = 0;
                 p1sjumpy = 30;
                 p1sjumping = true;
+                p1inAirs = true;
             }
             if(p1dy > 30)
             {
                 p1dy = 30;
             }
+ 
+//            if(p1nomove == true){
+//                player1.x = player1.x;
+//            }
             
             //lvl data and commands
             if(player1.x >= 100  && player1.y == 550 ){//if the player hits the ground he/she is sent back to start
@@ -236,6 +268,11 @@ public class SinglePlayerTerp extends JComponent implements KeyListener{
             }
             if(screen == 3 && player1.x == 1050){//ends lvl 1 at 950 coords and starts lvl 2
                 screen = LVL2;
+                player1.x = 20;
+                player1.y = 550;
+            }
+            if(screen == 4 && player1.x == 1250){
+                screen = LVL3;
             }
             
             
@@ -248,8 +285,9 @@ public class SinglePlayerTerp extends JComponent implements KeyListener{
             
             
             
-            //collisions
             
+            //collisions
+            if (screen == 3){
             if(player1.intersects(l1b1)){//player 1 collides with a block
                 handleCollision(player1,l1b1);
             }
@@ -268,7 +306,28 @@ public class SinglePlayerTerp extends JComponent implements KeyListener{
             if(player1.intersects(l1b6)){//player 1 collides with a block
                 handleCollision(player1,l1b6);
             }
-            
+            }
+            if (screen == 4){
+                if(player1.intersects(l2b1)){//player 1 collides with a block
+                handleCollision(player1,l2b1);
+            }
+            if(player1.intersects(l2b2)){//player 1 collides with a block
+                handleCollision(player1,l2b2);
+            }
+            if(player1.intersects(l2b3)){//player 1 collides with a block
+                handleCollision(player1,l2b3);
+            }
+            if(player1.intersects(l2b4)){//player 1 collides with a block
+                handleCollision(player1,l2b4);
+            }
+            if(player1.intersects(l2b5)){//player 1 collides with a block
+                handleCollision(player1,l2b5);
+            }
+            if(player1.intersects(l2b6)){//player 1 collides with a block
+                handleCollision(player1,l2b6);
+            }
+                
+            }
             
             // GAME LOGIC ENDS HERE 
             
