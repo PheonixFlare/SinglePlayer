@@ -97,7 +97,8 @@ public class SinglePlayerTerp extends JComponent implements KeyListener{
     //lvl 3
     
     //dialog boxes
-    Object[] modeSelect = {"Single Player" , "Co-Op" , "Race Mode"};
+    Object[] modeSelect = {"Single Player" , "Co-Op" , "Race Mode" , "How To Play"};
+    Object[] lvlSelect = {"1" , "2"};
     // drawing of the game happens in here
     // we use the Graphics object, g, to perform the drawing
     // NOTE: This is already double buffered!(helps with framerate/speed)
@@ -114,6 +115,10 @@ public class SinglePlayerTerp extends JComponent implements KeyListener{
         if(screen == 1){
             g.drawImage(mode, 0, 0, null);
         }
+        if (screen == 7){
+            g.drawImage(nope,0 ,0 , null);
+        }
+                
         if (screen == 2){
             g.drawImage(lvlselect, 0, 0, null);
             
@@ -145,6 +150,7 @@ public class SinglePlayerTerp extends JComponent implements KeyListener{
         g.fillRect(l2b6.x - camx, l2b6.y, l2b6.width, l2b6.height);
         }
         
+        
         // GAME DRAWING ENDS HERE
     }
     
@@ -171,11 +177,11 @@ public class SinglePlayerTerp extends JComponent implements KeyListener{
             // all your game rules and move is done in here
             // GAME LOGIC STARTS HERE 
             //screen logic\
-            
+            String l = "";
             String s = "";
             if(screen == 1){
                 s = (String)JOptionPane.showInputDialog(null, "Please select a mode", "Mode", JOptionPane.QUESTION_MESSAGE, null, modeSelect, "Single Player");
-            }
+            
             if( s == modeSelect[0])
             {
                screen = SLVL;
@@ -183,19 +189,26 @@ public class SinglePlayerTerp extends JComponent implements KeyListener{
             } else {
                 screen = NOPE;
             }
+            }
+            if(screen == 2){
+                l = (String)JOptionPane.showInputDialog(null, "Please select a level", "Level", JOptionPane.QUESTION_MESSAGE, null, lvlSelect, "Level Select");
+                
+                
+                if(l == lvlSelect[0]){
+                    screen = 3;
+                } else if (l == lvlSelect[1]){
+                    screen = 4;
+                }
+            }
    
             if(change){
                 if (screen == MAIN){
                     screen = MODE;
                     change = false;
-                } else if (screen == MODE){
-                    screen = SLVL;
-                    change = false;
-//                } else if (screen == SLVL){
-//                    screen = LVL1;
-//                    change = false;
-//                } 
             }
+            }
+                
+            
             if(screen == 3){//players cant stall jump on level 1
                 p1sjump = false;
             }
@@ -353,7 +366,8 @@ public class SinglePlayerTerp extends JComponent implements KeyListener{
                     Thread.sleep(desiredTime - deltaTime);
                 }catch(Exception e){};
             }
-        }
+        
+    }
     }
     
     /**
