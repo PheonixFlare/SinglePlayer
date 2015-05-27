@@ -108,7 +108,11 @@ public class SinglePlayerTerp extends JComponent implements KeyListener{
         // always clear the screen first!
         g.clearRect(0, 0, WIDTH, HEIGHT);
         
-        // GAME DRAWING GOES HERE 
+        // GAME DRAWING GOES HERE
+        if (screen == 2){
+            g.drawImage(lvlselect, 0, 0, null);
+            
+        }
         if(screen == 0){
             g.drawImage(main, 0, 0, null);
         }
@@ -119,10 +123,6 @@ public class SinglePlayerTerp extends JComponent implements KeyListener{
             g.drawImage(nope,0 ,0 , null);
         }
                 
-        if (screen == 2){
-            g.drawImage(lvlselect, 0, 0, null);
-            
-        }
         if (screen == 3){
         g.drawImage(background, 0, 0, null);
         g.setColor(Color.RED);
@@ -184,7 +184,7 @@ public class SinglePlayerTerp extends JComponent implements KeyListener{
             
             if( s == modeSelect[0])
             {
-               screen = SLVL;
+               screen = 2;
                change = false;
             } else {
                 screen = NOPE;
