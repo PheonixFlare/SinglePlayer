@@ -41,14 +41,14 @@ public class levels extends JComponent implements KeyListener{
     int camy = 0;
     
     
-    Rectangle player = new Rectangle(300, 300, 30, 30);
+    Rectangle player = new Rectangle(20, 550, 30, 30);
     
-    Rectangle l2b1 = new Rectangle(100, 450, 50, 100);
-    Rectangle l2b2 = new Rectangle(250, 450, 50, 50);
-    Rectangle l2b3 = new Rectangle(400, 400, 50, 100);
-    Rectangle l2b4 = new Rectangle(550, 300, 50, 100);
-    Rectangle l2b5 = new Rectangle(750, 200, 40, 40);
-    Rectangle l2b6 = new Rectangle(1000, 400, 40, 40);
+    Rectangle l2b1 = new Rectangle(150, 250, 50, 100);
+    Rectangle l2b2 = new Rectangle(450, 450, 40, 40);
+    Rectangle l2b3 = new Rectangle(600, 400, 10, 100);
+    Rectangle l2b4 = new Rectangle(750, 150, 10, 100);
+    Rectangle l2b5 = new Rectangle(1000, 4750, 40, 40);
+    Rectangle l2b6 = new Rectangle(1200, 400, 40, 40);
     
 
     // drawing of the game happens in here

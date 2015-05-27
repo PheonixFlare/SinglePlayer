@@ -42,6 +42,7 @@ public class SinglePlayerTerp extends JComponent implements KeyListener{
     final int LVL1 = 3;
     final int LVL2 = 4;
     final int LVL3 = 5;
+    final int NOPE = 7;
     
     //images
     BufferedImage main = ImageHelper.loadImage("MainScreen.png");
@@ -49,7 +50,7 @@ public class SinglePlayerTerp extends JComponent implements KeyListener{
     BufferedImage background = ImageHelper.loadImage("background.png");
     BufferedImage b1 = ImageHelper.loadImage("100x50 block.png");
     BufferedImage lvlselect = ImageHelper.loadImage("lvlselect.png");
-//    BufferedImage nope = ImageHelper.loadImage("Nope.png");
+    BufferedImage nope = ImageHelper.loadImage("Nope_edited-1.png");
     int screen = MAIN;
     boolean change = false;
     //player
@@ -143,6 +144,7 @@ public class SinglePlayerTerp extends JComponent implements KeyListener{
         g.fillRect(l2b5.x - camx, l2b5.y, l2b5.width, l2b5.height);
         g.fillRect(l2b6.x - camx, l2b6.y, l2b6.width, l2b6.height);
         }
+        
         // GAME DRAWING ENDS HERE
     }
     
@@ -170,17 +172,16 @@ public class SinglePlayerTerp extends JComponent implements KeyListener{
             // GAME LOGIC STARTS HERE 
             //screen logic\
             
-            
-            if(screen == 3){//players cant stall jump on level 1
-                p1sjump = false;
-            }
             String s = "";
             if(screen == 1){
                 s = (String)JOptionPane.showInputDialog(null, "Please select a mode", "Mode", JOptionPane.QUESTION_MESSAGE, null, modeSelect, "Single Player");
             }
             if( s == modeSelect[0])
             {
-                System.out.println("blah");
+               screen = SLVL;
+               change = false;
+            } else {
+                screen = NOPE;
             }
    
             if(change){
@@ -190,10 +191,13 @@ public class SinglePlayerTerp extends JComponent implements KeyListener{
                 } else if (screen == MODE){
                     screen = SLVL;
                     change = false;
-                } else if (screen == SLVL){
-                    screen = LVL1;
-                    change = false;
-                } 
+//                } else if (screen == SLVL){
+//                    screen = LVL1;
+//                    change = false;
+//                } 
+            }
+            if(screen == 3){//players cant stall jump on level 1
+                p1sjump = false;
             }
             
             //game logic
