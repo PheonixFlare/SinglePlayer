@@ -43,12 +43,12 @@ public class levels extends JComponent implements KeyListener{
     
     Rectangle player = new Rectangle(20, 550, 30, 30);
     
-    Rectangle l2b1 = new Rectangle(150, 250, 50, 100);
-    Rectangle l2b2 = new Rectangle(450, 450, 40, 40);
-    Rectangle l2b3 = new Rectangle(600, 400, 10, 100);
-    Rectangle l2b4 = new Rectangle(750, 150, 10, 100);
-    Rectangle l2b5 = new Rectangle(1000, 4750, 40, 40);
-    Rectangle l2b6 = new Rectangle(1200, 400, 40, 40);
+    Rectangle l3b1 = new Rectangle(0, 400, 50, -600);
+    Rectangle l3b2 = new Rectangle(250, 600, 50, -600);
+    Rectangle l3b3 = new Rectangle(40, 390, 50, 10);
+    Rectangle l3b4 = new Rectangle(210, 450, 50, 10);
+    Rectangle l3b5 = new Rectangle(210, 300, 50, 10);
+    Rectangle l3b6 = new Rectangle(40, 200, 50, 10);
     
 
     // drawing of the game happens in here
@@ -63,12 +63,12 @@ public class levels extends JComponent implements KeyListener{
         // GAME DRAWING GOES HERE 
         g.fillRect(player.x - camx, player.y - camy, player.height, player.width);
         
-        g.fillRect(l2b1.x - camx, l2b1.y - camy, l2b1.height, l2b1.width);
-        g.fillRect(l2b2.x - camx, l2b2.y - camy, l2b2.height, l2b2.width);
-        g.fillRect(l2b3.x - camx, l2b3.y - camy, l2b3.height, l2b3.width);
-        g.fillRect(l2b4.x - camx, l2b4.y - camy, l2b4.height, l2b4.width);
-        g.fillRect(l2b5.x - camx, l2b5.y - camy, l2b5.height, l2b5.width);
-        g.fillRect(l2b6.x - camx, l2b6.y - camy, l2b6.height, l2b6.width);
+        g.fillRect(l3b1.x - camx, l3b1.y - camy, l3b1.width, l3b1.height);
+        g.fillRect(l3b2.x - camx, l3b2.y - camy, l3b2.width, l3b2.height);
+        g.fillRect(l3b3.x - camx, l3b3.y - camy, l3b3.width, l3b3.height);
+        g.fillRect(l3b4.x - camx, l3b4.y - camy, l3b4.width, l3b4.height);
+        g.fillRect(l3b5.x - camx, l3b5.y - camy, l3b5.width, l3b5.height);
+        g.fillRect(l3b6.x - camx, l3b6.y - camy, l3b6.width, l3b6.height);
         
         
         
