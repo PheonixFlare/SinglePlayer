@@ -43,19 +43,17 @@ public class levels extends JComponent implements KeyListener{
     
     Rectangle player = new Rectangle(20, 550, 30, 30);
     
-    Rectangle l3b1 = new Rectangle(100, 500, 10, 400);
-    Rectangle l3b2 = new Rectangle(150, 450, 20, 400);
-    Rectangle l3b3 = new Rectangle(200, 400, 30, 400);
-    Rectangle l3b4 = new Rectangle(300, 325, 40, 400);
-    Rectangle l3b5 = new Rectangle(400, 200, 20, 400);
-    Rectangle l3b6 = new Rectangle(500, 500, 40, 400);
-    Rectangle l3b7 = new Rectangle(600, 350, 50, 400);
-    Rectangle l3b8 = new Rectangle(600, 280, 50, -1000);
-    Rectangle l3b9 = new Rectangle(800, 500, 200, 30);
-    Rectangle l3b10 = new Rectangle(0,0,0,0);
-    Rectangle l3b11 = new Rectangle(0,0,0,0);
-    Rectangle l3b12 = new Rectangle(0,0,0,0);
-    Rectangle l3b13 = new Rectangle(0,0,0,0);
+    Rectangle l5b0 = new Rectangle(0, 0, 0, 0);
+    Rectangle l5b1 = new Rectangle(0, 0, 0, 0);
+    Rectangle l5b2 = new Rectangle(0, 0, 0, 0);
+    Rectangle l5b3 = new Rectangle(0, 0, 0, 0);
+    Rectangle l5b4 = new Rectangle(0, 0, 0, 0);
+    Rectangle l5b5 = new Rectangle(0, 0, 0, 0);
+    Rectangle l5b6 = new Rectangle(0, 0, 0, 0);
+    Rectangle l5b7 = new Rectangle(0, 0, 0, 0);
+    Rectangle l5b8 = new Rectangle(0, 0, 0, 0);
+    Rectangle l5b9 = new Rectangle(0, 0, 0, 0);
+    
     
 
     // drawing of the game happens in here
@@ -70,17 +68,16 @@ public class levels extends JComponent implements KeyListener{
         // GAME DRAWING GOES HERE 
         g.fillRect(player.x - camx, player.y - camy, player.height, player.width);
         
-        g.fillRect(l4b1.x - camx, l4b1.y - camy , l4b1.width, l4b1.height);
-        g.fillRect(l4b2.x - camx, l4b2.y - camy , l4b2.width, l4b2.height);
-        g.fillRect(l4b3.x - camx, l4b3.y - camy , l4b3.width, l4b3.height);
-        g.fillRect(l4b4.x - camx, l4b4.y - camy , l4b4.width, l4b4.height);
-        g.fillRect(l4b5.x - camx, l4b5.y - camy , l4b5.width, l4b5.height);
-        g.fillRect(l4b6.x - camx, l4b6.y - camy , l4b6.width, l4b6.height);
-        g.fillRect(l4b7.x - camx, l4b7.y - camy , l4b7.width, l4b7.height);
-        g.fillRect(l4b8.x - camx, l4b8.y - camy , l4b8.width, l4b8.height);
-        g.fillRect(l4b9.x - camx, l4b9.y - camy , l4b9.width, l4b9.height);
-        g.fillRect(l4b10.x - camx, l4b10.y - camy , l4b10.width, l4b10.height);
-        
+        g.fillRect(l5b0.x - camx , l5b0.y - camy , l5b0.width , l5b0.height);
+        g.fillRect(l5b1.x - camx , l5b1.y - camy , l5b1.width , l5b1.height);
+        g.fillRect(l5b2.x - camx , l5b2.y - camy , l5b2.width , l5b2.height);
+        g.fillRect(l5b3.x - camx , l5b3.y - camy , l5b3.width , l5b3.height);
+        g.fillRect(l5b4.x - camx , l5b4.y - camy , l5b4.width , l5b4.height);
+        g.fillRect(l5b5.x - camx , l5b5.y - camy , l5b5.width , l5b5.height);
+        g.fillRect(l5b6.x - camx , l5b6.y - camy , l5b6.width , l5b6.height);
+        g.fillRect(l5b7.x - camx , l5b7.y - camy , l5b7.width , l5b7.height);
+        g.fillRect(l5b8.x - camx , l5b8.y - camy , l5b8.width , l5b8.height);
+        g.fillRect(l5b9.x - camx , l5b9.y - camy , l5b9.width , l5b9.height);
         
         
         
