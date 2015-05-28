@@ -50,6 +50,8 @@ public class SinglePlayerTerp extends JComponent implements KeyListener{
     BufferedImage mode = ImageHelper.loadImage("Load Screen.png");
     BufferedImage background = ImageHelper.loadImage("background.png");
     BufferedImage b1 = ImageHelper.loadImage("100x50 block.png");
+    BufferedImage b2 = ImageHelper.loadImage("50x50 block.png");
+    BufferedImage b3 = ImageHelper.loadImage("40x40 block.png");
     BufferedImage lvlselect = ImageHelper.loadImage("lvlselect.png");
     BufferedImage nope = ImageHelper.loadImage("Nope_edited-1.png");
     BufferedImage teemo = ImageHelper.loadImage("teemo.png");
@@ -155,10 +157,10 @@ public class SinglePlayerTerp extends JComponent implements KeyListener{
         
         
         g.drawImage(b1, l1b1.x - camx, l1b1.y, null);
-        g.fillRect(l1b2.x - camx, l1b2.y, l1b2.width, l1b2.height);
+        g.drawImage(b2, l1b2.x - camx, l1b2.y, null);
         g.drawImage(b1, l1b3.x - camx, l1b3.y, null);
         g.drawImage(b1, l1b4.x - camx, l1b4.y, null);
-        g.fillRect(l1b5.x - camx, l1b5.y, l1b5.width, l1b5.height);
+        g.drawImage(b3, l1b5.x - camx, l1b5.y, null);
         g.fillRect(l1b6.x - camx, l1b6.y, l1b6.width, l1b6.height);
         
         }
