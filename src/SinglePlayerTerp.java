@@ -43,7 +43,10 @@ public class SinglePlayerTerp extends JComponent implements KeyListener{
     final int LVL2 = 4;
     final int LVL3 = 5;
     final int LVL4 = 8;
+    final int LVL5 = 9;
+    final int LVL6 = 10;
     final int NOPE = 7;
+    final int END = 11;
     
     //images
     BufferedImage main = ImageHelper.loadImage("MainScreen.png");
@@ -57,7 +60,10 @@ public class SinglePlayerTerp extends JComponent implements KeyListener{
     BufferedImage nope = ImageHelper.loadImage("Nope_edited-1.png");
     BufferedImage teemo = ImageHelper.loadImage("teemo.png");
     BufferedImage howto = ImageHelper.loadImage("howto.png");
-//    BufferedImage gnar = ImageHelper.loadImage("gnar.png");
+    BufferedImage finish = ImageHelper.loadImage("finish.png");
+    BufferedImage gnar = ImageHelper.loadImage("gnar.png");
+    BufferedImage b5 = ImageHelper.loadImage("100x10 block.png");
+    
     int screen = MAIN;
     boolean change = false;
     //player
@@ -92,7 +98,8 @@ public class SinglePlayerTerp extends JComponent implements KeyListener{
     Rectangle l1b3 = new Rectangle(400, 400, 100, 50);
     Rectangle l1b4 = new Rectangle(550, 300, 100, 50);
     Rectangle l1b5 = new Rectangle(750, 200, 40, 40);
-    Rectangle l1b6 = new Rectangle(950, 400, 300, 40);
+    Rectangle l1b6 = new Rectangle(950, 400, 100, 40);
+    Rectangle l1finish = new Rectangle(1050, 300, 50, 100);
     
     //lvl 2
     Rectangle l2b1 = new Rectangle(150, 250, 100, 50);
@@ -100,17 +107,10 @@ public class SinglePlayerTerp extends JComponent implements KeyListener{
     Rectangle l2b3 = new Rectangle(600, 400, 100, 10);
     Rectangle l2b4 = new Rectangle(750, 150, 100, 10);
     Rectangle l2b5 = new Rectangle(1000, 475, 40, 40);
-    Rectangle l2b6 = new Rectangle(1200, 400, 300, 40);
+    Rectangle l2b6 = new Rectangle(1200, 400, 100, 40);
+    Rectangle l2finish = new Rectangle(1250, 300, 50, 100);
     
-    //lvl 4
-    Rectangle l3b1 = new Rectangle(0, 400, 50, -1000);
-    Rectangle l3b2 = new Rectangle(250, 600, 50, -1000);
-    Rectangle l3b3 = new Rectangle(40, 390, 50, 10);
-    Rectangle l3b4 = new Rectangle(210, 450, 50, 10);
-    Rectangle l3b5 = new Rectangle(210, 300, 50, 10);
-    Rectangle l3b6 = new Rectangle(40, 200, 50, 10);
-    
-    //lvl 3
+    //lvl 3 labeled as L4 but really L3
     Rectangle l4b1 = new Rectangle(100, 500, 40, 400);
     Rectangle l4b2 = new Rectangle(150, 450, 40, 400);
     Rectangle l4b3 = new Rectangle(200, 400, 30, 400);
@@ -120,6 +120,25 @@ public class SinglePlayerTerp extends JComponent implements KeyListener{
     Rectangle l4b7 = new Rectangle(600, 350, 50, 400);
     Rectangle l4b8 = new Rectangle(600, 280, 50, -1000);
     Rectangle l4b9 = new Rectangle(800, 500, 200, 30);
+    Rectangle l4finish = new Rectangle(950, 400, 50, 100);
+//    
+    //lvl 4 labeled as L3 bu really L4
+    Rectangle l3b0 = new Rectangle(150, -100, 50, 900);
+    Rectangle l3b1 = new Rectangle(100, 500, 50, 10);
+    Rectangle l3b2 = new Rectangle(0, 350, 50, 10);
+    Rectangle l3b3 = new Rectangle(100, 200, 50, 10);
+    Rectangle l3b4 = new Rectangle(0, 50, 50, 10);
+    Rectangle l3b5 = new Rectangle(100, -100, 50, 10);
+    Rectangle l3b6 = new Rectangle(300, -50, 50, 10);
+    Rectangle l3b7 = new Rectangle(520, 150, 50, 10);
+    Rectangle l3b8 = new Rectangle(775, 400, 50, 10);
+    Rectangle l3b9 = new Rectangle(1000, 450, 200, 10);
+    Rectangle l3finish = new Rectangle(1050, 350, 50, 100);
+    
+    //lvl 5
+    
+    
+    //lvl 6
     
     
     //lvl5
@@ -127,7 +146,7 @@ public class SinglePlayerTerp extends JComponent implements KeyListener{
     
     //dialog boxes
     Object[] modeSelect = {"Single Player" , "Co-Op" , "Race Mode" , "How To Play"};
-    Object[] lvlSelect = {"1" , "2" , "3" , "4"};
+    Object[] lvlSelect = {"1" , "2" , "3" , "4" , "5"};
     // drawing of the game happens in here
     // we use the Graphics object, g, to perform the drawing
     // NOTE: This is already double buffered!(helps with framerate/speed)
@@ -156,59 +175,75 @@ public class SinglePlayerTerp extends JComponent implements KeyListener{
         }
                 
         if (screen == 3){
-        g.drawImage(background, 0, 0, null);
-        g.setColor(Color.GREEN);
-        g.drawImage(teemo, player1.x - camx, player1.y, null);
-        
-        
-        g.drawImage(b1, l1b1.x - camx, l1b1.y, null);
-        g.drawImage(b2, l1b2.x - camx, l1b2.y, null);
-        g.drawImage(b1, l1b3.x - camx, l1b3.y, null);
-        g.drawImage(b1, l1b4.x - camx, l1b4.y, null);
-        g.drawImage(b3, l1b5.x - camx, l1b5.y, null);
-        g.drawImage(b4, l1b6.x - camx, l1b6.y, null);
+            g.drawImage(background, 0, 0, null);
+            g.setColor(Color.GREEN);
+            g.drawImage(teemo, player1.x - camx, player1.y, null);
+
+            g.drawImage(b1, l1b1.x - camx, l1b1.y, null);
+            g.drawImage(b2, l1b2.x - camx, l1b2.y, null);
+            g.drawImage(b1, l1b3.x - camx, l1b3.y, null);
+            g.drawImage(b1, l1b4.x - camx, l1b4.y, null);
+            g.drawImage(b3, l1b5.x - camx, l1b5.y, null);
+            g.drawImage(b4, l1b6.x - camx, l1b6.y, null);
+            g.drawImage(finish, l1finish.x - camx, l1finish.y, null);
         
         }
         if (screen == 4){
-        g.drawImage(background, 0, 0, null);
-        g.setColor(Color.GREEN);
-        g.drawImage(teemo, player1.x - camx, player1.y, null);    
-            
-        g.fillRect(l2b1.x - camx, l2b1.y, l2b1.width, l2b1.height);
-        g.fillRect(l2b2.x - camx, l2b2.y, l2b2.width, l2b2.height);
-        g.fillRect(l2b3.x - camx, l2b3.y, l2b3.width, l2b3.height);
-        g.fillRect(l2b4.x - camx, l2b4.y, l2b4.width, l2b4.height);
-        g.fillRect(l2b5.x - camx, l2b5.y, l2b5.width, l2b5.height);
-        g.fillRect(l2b6.x - camx, l2b6.y, l2b6.width, l2b6.height);
-        }
-        if (screen == 8){
-        g.drawImage(background, 0, 0 - camy, null);
-        g.setColor(Color.GREEN);
-        g.drawImage(teemo, player1.x - camx, player1.y - camy, null);
-            
-        g.fillRect(l3b1.x - camx, l3b1.y - camy, l3b1.width, l3b1.height);
-        g.fillRect(l3b2.x - camx, l3b2.y - camy, l3b2.width, l3b2.height);
-        g.fillRect(l3b3.x - camx, l3b3.y - camy, l3b3.width, l3b3.height);
-        g.fillRect(l3b4.x - camx, l3b4.y - camy, l3b4.width, l3b4.height);
-        g.fillRect(l3b5.x - camx, l3b5.y - camy, l3b5.width, l3b5.height);
-        g.fillRect(l3b6.x - camx, l3b6.y - camy, l3b6.width, l3b6.height);    
-            
+            g.drawImage(background, 0, 0, null);
+            g.setColor(Color.GREEN);
+            g.drawImage(teemo, player1.x - camx, player1.y, null);
+
+            g.drawImage(b1, l2b1.x - camx, l2b1.y, null);
+            g.drawImage(b2, l2b2.x - camx, l2b2.y, null);
+            g.fillRect(l2b3.x - camx, l2b3.y , l2b3.width, l2b3.height);
+            g.fillRect(l2b4.x - camx, l2b4.y , l2b4.width, l2b4.height);
+            g.drawImage(b2, l2b5.x - camx, l2b5.y, null);
+            g.drawImage(b4, l2b6.x - camx, l2b6.y, null);
+            g.drawImage(finish, l2finish.x - camx, l2finish.y, null);
         }
         if (screen == 5){
-        g.drawImage(background, 0, 0 , null);
-        g.setColor(Color.GREEN);
-        g.drawImage(teemo, player1.x - camx, player1.y , null);    
-            
-        g.fillRect(l4b2.x - camx, l4b2.y , l4b2.width, l4b2.height);
-        g.fillRect(l4b3.x - camx, l4b3.y , l4b3.width, l4b3.height);
-        g.fillRect(l4b4.x - camx, l4b4.y , l4b4.width, l4b4.height);
-        g.fillRect(l4b5.x - camx, l4b5.y , l4b5.width, l4b5.height);
-        g.fillRect(l4b6.x - camx, l4b6.y , l4b6.width, l4b6.height);
-        g.fillRect(l4b7.x - camx, l4b7.y , l4b7.width, l4b7.height);
-        g.fillRect(l4b8.x - camx, l4b8.y , l4b8.width, l4b8.height);
-        g.fillRect(l4b9.x - camx, l4b9.y , l4b9.width, l4b9.height);
+            g.drawImage(background, 0, 0 , null);
+            g.setColor(Color.GREEN);
+            g.drawImage(teemo, player1.x - camx, player1.y , null);    
+
+            g.fillRect(l4b1.x - camx, l4b1.y ,  l4b1.width, l4b1.height);
+            g.fillRect(l4b3.x - camx, l4b3.y , l4b3.width, l4b3.height);
+            g.fillRect(l4b4.x - camx, l4b4.y , l4b4.width, l4b4.height);
+            g.fillRect(l4b5.x - camx, l4b5.y , l4b5.width, l4b5.height);
+            g.fillRect(l4b6.x - camx, l4b6.y , l4b6.width, l4b6.height);
+            g.fillRect(l4b7.x - camx, l4b7.y , l4b7.width, l4b7.height);
+            g.fillRect(l4b8.x - camx, l4b8.y , l4b8.width, l4b8.height);
+            g.fillRect(l4b9.x - camx, l4b9.y , l4b9.width, l4b9.height);
+            g.drawImage(finish, l4finish.x - camx, l4finish.y, null);
         }
-        
+        if (screen == 8){
+            g.drawImage(background, 0, 0 , null);
+            g.setColor(Color.GREEN);
+            g.drawImage(teemo, player1.x - camx, player1.y - camy, null);
+
+            g.fillRect(l3b0.x - camx , l3b0.y - camy , l3b0.width, l3b0.height);
+            g.fillRect(l3b1.x - camx , l3b1.y - camy , l3b1.width, l3b1.height);
+            g.fillRect(l3b2.x - camx , l3b2.y - camy , l3b2.width, l3b2.height);
+            g.fillRect(l3b3.x - camx , l3b3.y - camy , l3b3.width, l3b3.height);
+            g.fillRect(l3b4.x - camx , l3b4.y - camy , l3b3.width, l3b3.height);
+            g.fillRect(l3b5.x - camx , l3b5.y - camy , l3b5.width, l3b5.height);
+            g.fillRect(l3b6.x - camx , l3b6.y - camy , l3b6.width, l3b6.height);
+            g.fillRect(l3b7.x - camx , l3b7.y - camy , l3b7.width, l3b7.height);
+            g.fillRect(l3b8.x - camx , l3b8.y - camy , l3b8.width, l3b8.height);
+            g.fillRect(l3b9.x - camx , l3b9.y - camy , l3b9.width, l3b9.height);
+            
+        }
+        if (screen == 9){
+            g.drawImage(background, 0, 0 , null);
+            g.setColor(Color.GREEN);
+            g.drawImage(teemo, player1.x - camx, player1.y - camy, null);    
+        }
+        if (screen == 10){
+            g.drawImage(background, 0, 0 , null);
+            g.setColor(Color.GREEN);
+            g.drawImage(teemo, player1.x - camx, player1.y - camy, null);
+        }
+                
         
         // GAME DRAWING ENDS HERE
     }
@@ -235,66 +270,69 @@ public class SinglePlayerTerp extends JComponent implements KeyListener{
             
             // all your game rules and move is done in here
             // GAME LOGIC STARTS HERE 
-            //screen logic\
+            //screen logic
             String l = "";
             String s = "";
-            if(screen == 1){//this is the mode select screen
+            if (change){
+                if(screen == MAIN){
+                    screen = MODE;
+                    change = false;
+                }        
+            } else if (screen == 1){
                 s = (String)JOptionPane.showInputDialog(null, "Please select a mode", "Mode", JOptionPane.QUESTION_MESSAGE, null, modeSelect, "Single Player");
+                    if (s == modeSelect[0]){
+                        screen = 2;
+                        change = false;
+                    }else if (s == modeSelect[1]){//if they select co-op then the screen goes to the nope screen
+                        screen = 7;
+                        change = false;
+                    } else if (s == modeSelect[2]){//if they select race mode then the screen goes to the nope screen
+                        screen = 7;
+                        change = false;
+                    } else if (s == modeSelect[3]){//if they select how to then the screen goes to the how to screen
+                        screen = 6;
+                        change = false;
+                    }
+            } else if (screen == 2){
+                 l = (String)JOptionPane.showInputDialog(null, "Please select a level", "Level", JOptionPane.QUESTION_MESSAGE, null, lvlSelect, "Level Select");
+                    if (l == lvlSelect[0]){
+                        screen = 3;
+                        change = false;
+                    } else if (l == lvlSelect[1]){
+                        screen = 4;
+                        change = false;
+                    }else if (l == lvlSelect[2]){
+                        screen = 5;
+                        change = false;
+                    }else if (l == lvlSelect[3]){
+                        screen = 8;
+                        change = false;
+                    }
+            }
             
-            if( s == modeSelect[0])
-            {
-               screen = 2;
-               change = false;
-            } else if (s == modeSelect[1]){//if they select co-op then the screen goes to the nope screen
-                screen = NOPE;
-                change = false;
-            } else if (s == modeSelect[2]){//if they select race mode then the screen goes to the nope screen
-                screen = NOPE;
-                change = false;
-            } else if (s == modeSelect[3]){//if they select how to then the screen goes to the how to screen
-                screen = HOWTO;
-                change = false;
-            }
-            }
+            
             if (screen == 6){//if player is on the howto and they hit the change button, the game goes to mode screen
                 if (change){
-                    screen = 1;
+                    screen = 0;
+                    change = false;
                 }
             }
             if (screen == 7){//if player is on the nope and they hit the change button, the game goes to mode screen
                 if (change){
-                    screen = 1;
+                    screen = 0;
                     change = false;
                 }
-            }
-            if(screen == 2){
-                l = (String)JOptionPane.showInputDialog(null, "Please select a level", "Level", JOptionPane.QUESTION_MESSAGE, null, lvlSelect, "Level Select");
-                System.out.println("Hi");
-                
-                if(l == lvlSelect[0]){
-                    screen = 3;
-                } else if (l == lvlSelect[1]){
-                    screen = 4;
-                } else if (l == lvlSelect[2]){
-                    screen = 5;
-                } else if (l == lvlSelect[3]){
-                    screen = 8;
-                }
-
             }
    
-            if(change){
-                if (screen == MAIN){
-                    screen = MODE;
-                    change = false;
-            }
-            }
                 
             
             if(screen == 3){//players cant stall jump on level 1
                 p1sjump = false;
             }
-            if(screen == 5){
+            if(screen == 5){//players cannot stall jump on level 3 
+                p1sjump = false;
+            }
+            if(screen == 8){//players cannot stall jump on level 4 
                 p1sjump = false;
             }
             
@@ -363,24 +401,49 @@ public class SinglePlayerTerp extends JComponent implements KeyListener{
                 
             }
             if(screen == 3){
-                if (player1.y <= 0){//cannot go into the cieling
+                if (player1.y <= 0){//cannot go into the cieling on level 1
                     player1.y = 0;
             }
             }else if (screen == 4){
-               if (player1.y <= 0){//cannot go into the cieling
+               if (player1.y <= 0){//cannot go into the cling on level 2
                    player1.y = 0;
             } 
+            } else if (screen == 5){
+                if (player1.y <= 0){//cannot go into cieling on level 3
+                    player1.y = 0;
+                }
             }
             if (player1.x <= 0){//cannot go past x = 0
                 player1.x = 0;
             }
-            if(screen == 3 && player1.x == 1050){//ends lvl 1 at 950 coords and starts lvl 2
+            if(screen == 3 && player1.x == 1050){//ends lvl 1 at 1050 coords and starts lvl 2
                 screen = LVL2;
                 player1.x = 20;
                 player1.y = 550;
             }
             if(screen == 4 && player1.x == 1250){//ends lvl 2 at 1250 coords and starts lvl 3
                 screen = LVL3;
+                player1.x = 20;
+                player1.y = 550;
+            }
+            if(screen == 5 && player1.x == 950){//ends lvl 3 at 950 coords and starts lvl 4
+                screen = LVL4;
+                player1.x = 20;
+                player1.y = 550;
+            }
+            if(screen == 8 && player1.x == 1100){
+                screen = LVL5;
+                player1.x = 20;
+                player1.y = 550;
+            }
+            if(screen == 9 && player1.x == 1100){
+                screen = LVL6;
+                player1.x = 20;
+                player1.y = 550;
+            }
+            if(screen == 10 && player1.x == 1500){
+                screen = END;
+                
             }
             
             
@@ -436,32 +499,9 @@ public class SinglePlayerTerp extends JComponent implements KeyListener{
             }
                 
             }
-            if (screen == 8){
-                if(player1.intersects(l3b1)){//player 1 collides with a block
-                handleCollision(player1,l3b1);
-            }
-            if(player1.intersects(l3b2)){//player 1 collides with a block
-                handleCollision(player1,l3b2);
-            }
-            if(player1.intersects(l3b3)){//player 1 collides with a block
-                handleCollision(player1,l3b3);
-            }
-            if(player1.intersects(l3b4)){//player 1 collides with a block
-                handleCollision(player1,l3b4);
-            }
-            if(player1.intersects(l3b5)){//player 1 collides with a block
-                handleCollision(player1,l3b5);
-            }
-            if(player1.intersects(l3b6)){//player 1 collides with a block
-                handleCollision(player1,l3b6);
-            }
-            }
             if (screen == 5){
                 if(player1.intersects(l4b1)){//player 1 collides with a block
                 handleCollision(player1,l4b1);
-            }
-            if(player1.intersects(l4b2)){//player 1 collides with a block
-                handleCollision(player1,l4b2);
             }
             if(player1.intersects(l4b3)){//player 1 collides with a block
                 handleCollision(player1,l4b3);
@@ -484,6 +524,39 @@ public class SinglePlayerTerp extends JComponent implements KeyListener{
             }if(player1.intersects(l4b9)){//player 1 collides with a block
                 handleCollision(player1,l4b9);
                 
+            }
+            }
+            if (screen == 8){
+                
+            if(player1.intersects(l3b0)){//player 1 collides with a block
+                handleCollision2(player1,l3b0);
+            }
+            if(player1.intersects(l3b1)){//player 1 collides with a block
+                handleCollision2(player1,l3b1);
+            }
+            if(player1.intersects(l3b2)){//player 1 collides with a block
+                handleCollision2(player1,l3b2);
+            }
+            if(player1.intersects(l3b3)){//player 1 collides with a block
+                handleCollision2(player1,l3b3);
+            }
+            if(player1.intersects(l3b4)){//player 1 collides with a block
+                handleCollision2(player1,l3b4);
+            }
+            if(player1.intersects(l3b5)){//player 1 collides with a block
+                handleCollision2(player1,l3b5);
+            }
+            if(player1.intersects(l3b6)){//player 1 collides with a block
+                handleCollision2(player1,l3b6);
+            }
+            if(player1.intersects(l3b7)){//player 1 collides with a block
+                handleCollision2(player1,l3b7);
+            }
+            if(player1.intersects(l3b8)){//player 1 collides with a block
+                handleCollision2(player1,l3b8);
+            }
+            if(player1.intersects(l3b9)){//player 1 collides with a block
+                handleCollision2(player1,l3b9);
             }
             }
                 
@@ -589,6 +662,25 @@ public class SinglePlayerTerp extends JComponent implements KeyListener{
                 player.y += overlap.height;
             }
             p1dy = 0;
+        }
+    }
+    void handleCollision2(Rectangle player, Rectangle block){
+        Rectangle overlap = player.intersection(block);
+        
+        if(overlap.height > overlap.width){
+            if (player.x < block.x){
+                player.x -= overlap.width;
+            } else if (player.x + player.width > block.x + block.width){
+                player.x += overlap.width;
+            }
+        } else {
+            p1dy = 0;
+            if (player.y < block.y){
+                player.y -= overlap.height;
+                p1inAir = false;
+            } else if (player.y + player.height > block.y + block.height){
+                player.y += overlap.height;
+            }
         }
     }
 }
