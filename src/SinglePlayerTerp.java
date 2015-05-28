@@ -53,6 +53,7 @@ public class SinglePlayerTerp extends JComponent implements KeyListener{
     BufferedImage lvlselect = ImageHelper.loadImage("lvlselect.png");
     BufferedImage nope = ImageHelper.loadImage("Nope_edited-1.png");
     BufferedImage teemo = ImageHelper.loadImage("teemo.png");
+    BufferedImage gnar = ImageHelper.loadImage("gnar.png");
     int screen = MAIN;
     boolean change = false;
     //player
