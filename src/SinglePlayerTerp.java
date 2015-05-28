@@ -52,10 +52,12 @@ public class SinglePlayerTerp extends JComponent implements KeyListener{
     BufferedImage b1 = ImageHelper.loadImage("100x50 block.png");
     BufferedImage b2 = ImageHelper.loadImage("50x50 block.png");
     BufferedImage b3 = ImageHelper.loadImage("40x40 block.png");
+    BufferedImage b4 = ImageHelper.loadImage("300x40 block.png");
     BufferedImage lvlselect = ImageHelper.loadImage("lvlselect.png");
     BufferedImage nope = ImageHelper.loadImage("Nope_edited-1.png");
     BufferedImage teemo = ImageHelper.loadImage("teemo.png");
-    BufferedImage gnar = ImageHelper.loadImage("gnar.png");
+    BufferedImage howto = ImageHelper.loadImage("howto.png");
+//    BufferedImage gnar = ImageHelper.loadImage("gnar.png");
     int screen = MAIN;
     boolean change = false;
     //player
@@ -149,6 +151,9 @@ public class SinglePlayerTerp extends JComponent implements KeyListener{
         if (screen == 7){
             g.drawImage(nope,0 ,0 , null);
         }
+        if (screen == 6){
+            g.drawImage(howto, 0, 0, null);
+        }
                 
         if (screen == 3){
         g.drawImage(background, 0, 0, null);
@@ -161,7 +166,7 @@ public class SinglePlayerTerp extends JComponent implements KeyListener{
         g.drawImage(b1, l1b3.x - camx, l1b3.y, null);
         g.drawImage(b1, l1b4.x - camx, l1b4.y, null);
         g.drawImage(b3, l1b5.x - camx, l1b5.y, null);
-        g.fillRect(l1b6.x - camx, l1b6.y, l1b6.width, l1b6.height);
+        g.drawImage(b4, l1b6.x - camx, l1b6.y, null);
         
         }
         if (screen == 4){
@@ -233,16 +238,34 @@ public class SinglePlayerTerp extends JComponent implements KeyListener{
             //screen logic\
             String l = "";
             String s = "";
-            if(screen == 1){
+            if(screen == 1){//this is the mode select screen
                 s = (String)JOptionPane.showInputDialog(null, "Please select a mode", "Mode", JOptionPane.QUESTION_MESSAGE, null, modeSelect, "Single Player");
             
             if( s == modeSelect[0])
             {
                screen = 2;
                change = false;
-            } else {
+            } else if (s == modeSelect[1]){//if they select co-op then the screen goes to the nope screen
                 screen = NOPE;
+                change = false;
+            } else if (s == modeSelect[2]){//if they select race mode then the screen goes to the nope screen
+                screen = NOPE;
+                change = false;
+            } else if (s == modeSelect[3]){//if they select how to then the screen goes to the how to screen
+                screen = HOWTO;
+                change = false;
             }
+            }
+            if (screen == 6){//if player is on the howto and they hit the change button, the game goes to mode screen
+                if (change){
+                    screen = 1;
+                }
+            }
+            if (screen == 7){//if player is on the nope and they hit the change button, the game goes to mode screen
+                if (change){
+                    screen = 1;
+                    change = false;
+                }
             }
             if(screen == 2){
                 l = (String)JOptionPane.showInputDialog(null, "Please select a level", "Level", JOptionPane.QUESTION_MESSAGE, null, lvlSelect, "Level Select");
