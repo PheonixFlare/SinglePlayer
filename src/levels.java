@@ -43,16 +43,16 @@ public class levels extends JComponent implements KeyListener{
     
     Rectangle player = new Rectangle(20, 550, 30, 30);
     
-    Rectangle l5b0 = new Rectangle(0, 0, 0, 0);
-    Rectangle l5b1 = new Rectangle(0, 0, 0, 0);
-    Rectangle l5b2 = new Rectangle(0, 0, 0, 0);
-    Rectangle l5b3 = new Rectangle(0, 0, 0, 0);
-    Rectangle l5b4 = new Rectangle(0, 0, 0, 0);
-    Rectangle l5b5 = new Rectangle(0, 0, 0, 0);
-    Rectangle l5b6 = new Rectangle(0, 0, 0, 0);
-    Rectangle l5b7 = new Rectangle(0, 0, 0, 0);
-    Rectangle l5b8 = new Rectangle(0, 0, 0, 0);
-    Rectangle l5b9 = new Rectangle(0, 0, 0, 0);
+    Rectangle l5b0 = new Rectangle(100, 400, 30, 30);
+    Rectangle l5b1 = new Rectangle(220, 300, 30, 30);
+    Rectangle l5b2 = new Rectangle(350, 200, 40, 40);
+    Rectangle l5b3 = new Rectangle(350, -150, 40, 290);
+    Rectangle l5b4 = new Rectangle(500, 450, 30, 30);
+    Rectangle l5b5 = new Rectangle(675, 300, 30, 30);
+    Rectangle l5b6 = new Rectangle(800, 300, 30, 30);
+    Rectangle l5b7 = new Rectangle(950, 525, 30, 30);
+    Rectangle l5b8 = new Rectangle(1150, 525, 30, 30);
+    Rectangle l5b9 = new Rectangle(1300, 530, 30, 300);
     
     
 
@@ -129,8 +129,9 @@ public class levels extends JComponent implements KeyListener{
             } else {
                 camy = player.y - HEIGHT/2;
             }
-            
-
+            if (player.x <= 0){
+                player.x = 0;
+            }
             // GAME LOGIC ENDS HERE 
             
             // update the drawing (calls paintComponent)
