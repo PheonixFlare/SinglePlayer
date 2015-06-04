@@ -554,8 +554,36 @@ public class Terp extends JComponent implements KeyListener {
                     }
                 }
 
-            } else if (screen == 13 || screen == 14) {
+            } 
+            if (screen == 13 || screen == 14) {
                 
+                if (player1.x < WIDTH / 2) {
+                    camx = 0;
+                } else {
+                    camx = player1.x - WIDTH / 2;
+                }
+                
+                if (player3.x < WIDTH / 2) {
+                    camx = 0;
+                } else {
+                    camx = player3.x - WIDTH / 2;
+                }
+                p1dy = p1dy + gravity;
+                p3dy = p3dy + gravity;
+
+                if (p1right) {//player 1 move right
+                    player2.x = player1.x + speed;
+                }
+                if (p3right){//player 3 move right
+                    player3.x = player3.x + speed;
+                }
+                if (p1left){//player 1 move left
+                    player2.x = player1.x - speed;
+                }
+                if (p3left){//player 4 move left
+                    player3.x = player3.x - speed;
+                }
+                        
             }
 
 
@@ -624,12 +652,6 @@ public class Terp extends JComponent implements KeyListener {
             p1sjump = true;
         } else if (keyCode == KeyEvent.VK_G) {
             change = true;
-        } else if (keyCode == KeyEvent.VK_W) {
-            p2jump = true;
-        } else if (keyCode == KeyEvent.VK_A) {
-            p2left = true;
-        } else if (keyCode == KeyEvent.VK_D) {
-            p2right = true;
         } else if (keyCode == KeyEvent.VK_UP) {
             p3jump = true;
         } else if (keyCode == KeyEvent.VK_LEFT) {
@@ -650,12 +672,6 @@ public class Terp extends JComponent implements KeyListener {
             p1right = false;
         } else if (keyCode == KeyEvent.VK_SPACE) {
             p1sjump = false;
-        } else if (keyCode == KeyEvent.VK_W) {
-            p2jump = false;
-        } else if (keyCode == KeyEvent.VK_A) {
-            p2left = false;
-        } else if (keyCode == KeyEvent.VK_D) {
-            p2right = false;
         } else if (keyCode == KeyEvent.VK_UP) {
             p3jump = false;
         } else if (keyCode == KeyEvent.VK_LEFT) {
@@ -749,8 +765,10 @@ public class Terp extends JComponent implements KeyListener {
     }
 
     void drawRL1(Graphics g) {
-        g.drawImage(rbackground, 0, 0, null);
-        g.drawImage(teemo, player2.x, player3.y, null);
+        g.drawImage(rbackground, 0 - camx, 0, null);
+        g.setColor(Color.RED);
+        g.fillRect(player1.x - camx, player1.y, player1.width, player1.height);
+        g.fillRect(player3.x - camx, player3.y, player3.width, player3.height);
 
         g.setColor(Color.GREEN);
         g.fillRect(0, 580, 3200, 40);
