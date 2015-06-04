@@ -61,7 +61,7 @@ public class Terp extends JComponent implements KeyListener {
     BufferedImage b5 = ImageHelper.loadImage("100x10 block.png");
     BufferedImage ENDpic = ImageHelper.loadImage("END.png");
     BufferedImage rmain = ImageHelper.loadImage("racemain.png");
-    BufferedImage rbackground = ImageHelper.loadImage("rmodeback.png");
+    BufferedImage rbackground = ImageHelper.loadImage("rmodebackground.png");
     int screen = MAIN;
     boolean change = false;
     //players
@@ -71,19 +71,20 @@ public class Terp extends JComponent implements KeyListener {
     //misc
     int ground = 550;
     int gravity = 2;
+    boolean sjumpEnd = false;
+    int speed = 5;
+    int camx = 0;
+    int camy = 0;
+    //single player variables
     int p1dy = 0;
     boolean p1inAir = false;
     int p1sjumpy = 10;
-    boolean sjumpEnd = false;
-    int speed = 5;
     boolean p1sjumping = false;
     boolean p1sinAir = false;
     boolean p1inAirs = false;
-    int camx = 0;
-    int camy = 0;
     boolean lvls = false;
     boolean count = false;
-    //player controls
+    //player 1 controls
     boolean p1jump = false;
     boolean p1left = false;
     boolean p1right = false;
@@ -91,6 +92,18 @@ public class Terp extends JComponent implements KeyListener {
     int p1l2count = 3;
     int p1l5count = 2;
     boolean p1nomove = false;
+    //player 2 controls for race mode
+    boolean p2jump = false;
+    boolean p2left = false;
+    boolean p2right = false;
+    boolean p2inAir = false;
+    int p2dy = 0;
+    //player 3 controls for race mode
+    boolean p3jump = false;
+    boolean p3left = false;
+    boolean p3right = false;
+    boolean p3inAir = false;
+    int p3dy = 0;
     //arrays for blocks
     Rectangle[] rectangles1 = {new Rectangle(150, 450, 50, 50), new Rectangle(100, 450, 50, 50), new Rectangle(250, 450, 50, 50), new Rectangle(450, 400, 50, 50), new Rectangle(400, 400, 50, 50), new Rectangle(600, 300, 50, 50), new Rectangle(550, 300, 50, 50), new Rectangle(750, 200, 50, 50), new Rectangle(1000, 400, 50, 50), new Rectangle(950, 400, 50, 50), new Rectangle(1050, 400, 50, 50), new Rectangle(1100, 400, 50, 50), new Rectangle(1150, 400, 50, 50)};
     Rectangle[] rectangles2 = {new Rectangle(150, 250, 50, 10), new Rectangle(200, 250, 50, 10), new Rectangle(450, 450, 50, 10), new Rectangle(600, 400, 50, 10), new Rectangle(750, 150, 50, 10),
@@ -205,19 +218,19 @@ public class Terp extends JComponent implements KeyListener {
         if (screen == 9) {
             g.drawImage(background, 0, 0, null);
             g.setColor(Color.GREEN);
-            g.drawImage(teemo, player1.x - camx, player1.y - camy, null);
+            g.drawImage(teemo, player1.x - camx, player1.y , null);
 
-            g.fillRect(l5b0.x - camx, l5b0.y - camy, l5b0.width, l5b0.height);
-            g.fillRect(l5b1.x - camx, l5b1.y - camy, l5b1.width, l5b1.height);
-            g.fillRect(l5b2.x - camx, l5b2.y - camy, l5b2.width, l5b2.height);
-            g.fillRect(l5b3.x - camx, l5b3.y - camy, l5b3.width, l5b3.height);
-            g.fillRect(l5b4.x - camx, l5b4.y - camy, l5b4.width, l5b4.height);
-            g.fillRect(l5b5.x - camx, l5b5.y - camy, l5b5.width, l5b5.height);
-            g.fillRect(l5b6.x - camx, l5b6.y - camy, l5b6.width, l5b6.height);
-            g.fillRect(l5b7.x - camx, l5b7.y - camy, l5b7.width, l5b7.height);
-            g.fillRect(l5b8.x - camx, l5b8.y - camy, l5b8.width, l5b8.height);
-            g.fillRect(l5b9.x - camx, l5b9.y - camy, l5b9.width, l5b9.height);
-            g.fillRect(0 - camx, 583 - camy, 100, 100);
+            g.fillRect(l5b0.x - camx, l5b0.y , l5b0.width, l5b0.height);
+            g.fillRect(l5b1.x - camx, l5b1.y , l5b1.width, l5b1.height);
+            g.fillRect(l5b2.x - camx, l5b2.y , l5b2.width, l5b2.height);
+            g.fillRect(l5b3.x - camx, l5b3.y , l5b3.width, l5b3.height);
+            g.fillRect(l5b4.x - camx, l5b4.y , l5b4.width, l5b4.height);
+            g.fillRect(l5b5.x - camx, l5b5.y , l5b5.width, l5b5.height);
+            g.fillRect(l5b6.x - camx, l5b6.y , l5b6.width, l5b6.height);
+            g.fillRect(l5b7.x - camx, l5b7.y , l5b7.width, l5b7.height);
+            g.fillRect(l5b8.x - camx, l5b8.y , l5b8.width, l5b8.height);
+            g.fillRect(l5b9.x - camx, l5b9.y , l5b9.width, l5b9.height);
+            g.fillRect(0 - camx, 583 , 100, 100);
         }
         if (screen == END) {
             g.drawImage(ENDpic, 0, 0, null);
@@ -225,7 +238,7 @@ public class Terp extends JComponent implements KeyListener {
         if (screen == RMODE) {
             g.drawImage(rmain, 0, 0, null);
         }
-        if (screen == RLVL1){
+        if (screen == RLVL1) {
             drawRL1(g);
         }
 
@@ -296,11 +309,11 @@ public class Terp extends JComponent implements KeyListener {
                 }
             } else if (screen == 12) {
                 r = (String) JOptionPane.showInputDialog(null, "Please select a race level", "Level", JOptionPane.QUESTION_MESSAGE, null, rmodeSelect, "Level Select");
-                if  (r == rmodeSelect[0]){
+                if (r == rmodeSelect[0]) {
                     screen = 13;
                     change = false;
-                    
-                } else if (r == rmodeSelect[1]){
+
+                } else if (r == rmodeSelect[1]) {
                     screen = 14;
                     change = false;
                 }
@@ -315,6 +328,12 @@ public class Terp extends JComponent implements KeyListener {
             }
             if (screen == 7) {//if player is on the nope and they hit the change button, the game goes to mode screen
                 if (change) {
+                    screen = 0;
+                    change = false;
+                }
+            }
+            if (screen == 11){
+                if(change){
                     screen = 0;
                     change = false;
                 }
@@ -438,19 +457,6 @@ public class Terp extends JComponent implements KeyListener {
                 if (screen == 9 && player1.x == 1400) {
                     screen = END;
                 }
-                if (screen == END && change) {
-                    screen = MAIN;
-                }
-
-
-
-
-
-
-
-
-
-
 
 
                 //collisions
@@ -548,7 +554,7 @@ public class Terp extends JComponent implements KeyListener {
                     }
                 }
 
-            } else if (screen == 13 || screen == 14){
+            } else if (screen == 13 || screen == 14) {
                 
             }
 
@@ -618,6 +624,18 @@ public class Terp extends JComponent implements KeyListener {
             p1sjump = true;
         } else if (keyCode == KeyEvent.VK_G) {
             change = true;
+        } else if (keyCode == KeyEvent.VK_W) {
+            p2jump = true;
+        } else if (keyCode == KeyEvent.VK_A) {
+            p2left = true;
+        } else if (keyCode == KeyEvent.VK_D) {
+            p2right = true;
+        } else if (keyCode == KeyEvent.VK_UP) {
+            p3jump = true;
+        } else if (keyCode == KeyEvent.VK_LEFT) {
+            p3left = true;
+        } else if (keyCode == KeyEvent.VK_RIGHT) {
+            p3right = true;
         }
     }
 
@@ -632,6 +650,18 @@ public class Terp extends JComponent implements KeyListener {
             p1right = false;
         } else if (keyCode == KeyEvent.VK_SPACE) {
             p1sjump = false;
+        } else if (keyCode == KeyEvent.VK_W) {
+            p2jump = false;
+        } else if (keyCode == KeyEvent.VK_A) {
+            p2left = false;
+        } else if (keyCode == KeyEvent.VK_D) {
+            p2right = false;
+        } else if (keyCode == KeyEvent.VK_UP) {
+            p3jump = false;
+        } else if (keyCode == KeyEvent.VK_LEFT) {
+            p3left = false;
+        } else if (keyCode == KeyEvent.VK_RIGHT) {
+            p3right = false;
         }
     }
 
@@ -717,8 +747,12 @@ public class Terp extends JComponent implements KeyListener {
         g.drawImage(finish, l4finish.x - camx, l4finish.y, null);
         g.fillRect(0 - camx, 583, 100, 100);
     }
-    void drawRL1(Graphics g){
-        g.drawImage(rbackground, 0 , 0, null);
+
+    void drawRL1(Graphics g) {
+        g.drawImage(rbackground, 0, 0, null);
         g.drawImage(teemo, player2.x, player3.y, null);
+
+        g.setColor(Color.GREEN);
+        g.fillRect(0, 580, 3200, 40);
     }
 }
