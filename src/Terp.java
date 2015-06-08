@@ -122,13 +122,7 @@ public class Terp extends JComponent implements KeyListener {
     //lvl 2
     Rectangle l2finish = new Rectangle(1250, 300, 50, 100);
     //lvl 3 labeled as L4 but really L3
-    Rectangle l4b1 = new Rectangle(100, 500, 35, 400);
-    Rectangle l4b2 = new Rectangle(150, 450, 35, 400);
-    Rectangle l4b3 = new Rectangle(200, 400, 35, 400);
-    Rectangle l4b4 = new Rectangle(300, 325, 35, 400);
     Rectangle l4b5 = new Rectangle(400, 200, 20, 400);
-    Rectangle l4b6 = new Rectangle(500, 500, 35, 400);
-    Rectangle l4b7 = new Rectangle(600, 350, 35, 400);
     Rectangle l4b9 = new Rectangle(800, 500, 200, 30);
     Rectangle l4finish = new Rectangle(950, 400, 50, 100);
 //    
@@ -199,21 +193,7 @@ public class Terp extends JComponent implements KeyListener {
             drawSL3(g);
         }
         if (screen == 8) {
-            g.drawImage(background, 0, 0, null);
-            g.setColor(Color.GREEN);
-            g.drawImage(teemo, player1.x - camx, player1.y - camy, null);
-
-            g.fillRect(l3b0.x - camx, l3b0.y - camy, l3b0.width, l3b0.height);
-            g.fillRect(l3b1.x - camx, l3b1.y - camy, l3b1.width, l3b1.height);
-            g.fillRect(l3b2.x - camx, l3b2.y - camy, l3b2.width, l3b2.height);
-            g.fillRect(l3b3.x - camx, l3b3.y - camy, l3b3.width, l3b3.height);
-            g.fillRect(l3b4.x - camx, l3b4.y - camy, l3b3.width, l3b3.height);
-            g.fillRect(l3b5.x - camx, l3b5.y - camy, l3b5.width, l3b5.height);
-            g.fillRect(l3b6.x - camx, l3b6.y - camy, l3b6.width, l3b6.height);
-            g.fillRect(l3b7.x - camx, l3b7.y - camy, l3b7.width, l3b7.height);
-            g.fillRect(l3b8.x - camx, l3b8.y - camy, l3b8.width, l3b8.height);
-            g.fillRect(l3b9.x - camx, l3b9.y - camy, l3b9.width, l3b9.height);
-            g.fillRect(0 - camx, 583 - camy, 100, 100);
+            drawSL4(g);
 
         }
         if (screen == 9) {
@@ -763,6 +743,16 @@ public class Terp extends JComponent implements KeyListener {
         g.fillRect(l4b9.x - camx, l4b9.y, l4b9.width, l4b9.height);
         g.drawImage(finish, l4finish.x - camx, l4finish.y, null);
         g.fillRect(0 - camx, 583, 100, 100);
+    }
+    void drawSL4(Graphics g){
+        g.drawImage(background, 0,0, null);
+        g.setColor(Color.GREEN);
+        g.drawImage(teemo, player1.x - camx, player1.y, null);
+        
+        for (int i = 0; i < rectangles4.length; i++) {
+            g.drawImage(b1, rectangles4[i].x - camx, rectangles4[i].y - camy, null);
+        }
+        g.fillRect(l3b0.x - camx, l3b0.y -camy, l3b0.width, l3b0.height);
     }
 
     void drawRL1(Graphics g) {
