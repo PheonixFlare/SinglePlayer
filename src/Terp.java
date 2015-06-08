@@ -75,6 +75,7 @@ public class Terp extends JComponent implements KeyListener {
     int speed = 5;
     int camx = 0;
     int camy = 0;
+    int camx3 = 0;
     //single player variables
     int p1dy = 0;
     boolean p1inAir = false;
@@ -554,8 +555,23 @@ public class Terp extends JComponent implements KeyListener {
                     }
                 }
 
-            } 
-            if (screen == 13 || screen == 14) {
+            } else if (screen == 13 || screen == 14) {
+                
+                p1dy = p1dy + gravity;
+                p3dy = p3dy + gravity;
+
+                if (p1right) {//player 1 move right
+                    player1.x = player1.x + speed;
+                }
+                if (p3right){//player 3 move right
+                    player3.x = player3.x + speed;
+                }
+                if (p1left){//player 1 move left
+                    player1.x = player1.x - speed;
+                }
+                if (p3left){//player 4 move left
+                    player3.x = player3.x - speed;
+                }
                 
                 if (player1.x < WIDTH / 2) {
                     camx = 0;
@@ -564,24 +580,9 @@ public class Terp extends JComponent implements KeyListener {
                 }
                 
                 if (player3.x < WIDTH / 2) {
-                    camx = 0;
+                    camx3 = 0;
                 } else {
-                    camx = player3.x - WIDTH / 2;
-                }
-                p1dy = p1dy + gravity;
-                p3dy = p3dy + gravity;
-
-                if (p1right) {//player 1 move right
-                    player2.x = player1.x + speed;
-                }
-                if (p3right){//player 3 move right
-                    player3.x = player3.x + speed;
-                }
-                if (p1left){//player 1 move left
-                    player2.x = player1.x - speed;
-                }
-                if (p3left){//player 4 move left
-                    player3.x = player3.x - speed;
+                    camx3 = player3.x - WIDTH / 2;
                 }
                         
             }
@@ -768,7 +769,7 @@ public class Terp extends JComponent implements KeyListener {
         g.drawImage(rbackground, 0 - camx, 0, null);
         g.setColor(Color.RED);
         g.fillRect(player1.x - camx, player1.y, player1.width, player1.height);
-        g.fillRect(player3.x - camx, player3.y, player3.width, player3.height);
+        g.fillRect(player3.x - camx3, player3.y, player3.width, player3.height);
 
         g.setColor(Color.GREEN);
         g.fillRect(0, 580, 3200, 40);
