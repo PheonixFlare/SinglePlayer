@@ -374,6 +374,7 @@ public class Terp extends JComponent implements KeyListener {
                 //lvl data and commands
                 if (player1.x >= 100 && player1.y == 550) {//if the player hits the ground he/she is sent back to start
                     player1.x = 20;
+                    
 
                 }
                 if (screen == 3) {
@@ -419,14 +420,14 @@ public class Terp extends JComponent implements KeyListener {
 
                 //collisions for single player
                 if (screen == 3) {//collisions for level 1
-                    for (int i = 0; i < rectangles1.length; i++) {
+                    for (int i = 0; i < rectangles1.length; i++) { // this for loop handles all collisions with the rectangles in level 1
                         if (player1.intersects(rectangles1[i])) {
                             handleCollision(player1, rectangles1[i]);
                         }
                     }
                 } else if (screen == 4) {//collisions for level 2
 
-                    for (int i = 0; i < rectangles2.length; i++) {
+                    for (int i = 0; i < rectangles2.length; i++) {// this for loop handles all collisions with the rectangles in level 2
                         if (player1.intersects(rectangles2[i])) {
                             handleCollision(player1, rectangles2[i]);
                         }
@@ -434,44 +435,44 @@ public class Terp extends JComponent implements KeyListener {
 
                 }
                 if (screen == 5) {//collisions for level 3
-                    for (int i = 0; i < rectangles3.length; i++) {
+                    for (int i = 0; i < rectangles3.length; i++) {// this for loop handles all collisions with the rectangles in level 3
                         if (player1.intersects(rectangles3[i])) {
                             handleCollision(player1, rectangles3[i]);
                         }
                     }
 
-                    if (player1.intersects(l4b9)) {
+                    if (player1.intersects(l4b9)) {// this if statment handles a collision with an extra block in level 3
                         handleCollision(player1, l4b9);
 
                     }
                 }
                 if (screen == 8) {//collisions for level 4
-                    for (int i = 0; i < rectangles4.length; i++) {
+                    for (int i = 0; i < rectangles4.length; i++) {// this for loop handles all collisions with the rectangles in level 4
                         if (player1.intersects(rectangles4[i])) {
                             handleCollision(player1, rectangles4[i]);
                         }
                     }
-                    if (player1.intersects(l3b0)) {
+                    if (player1.intersects(l3b0)) {// this if statment handles a collision with an extra block in level 4
                         handleCollision(player1, l3b0);
 
                     }
-                    if (player1.intersects(l3b9)) {
+                    if (player1.intersects(l3b9)) {// this if statment handles a collision with an extra block in level 4
                         handleCollision(player1, l3b9);
 
                     }
                 }
                 if (screen == 9) {//collisions for level 5
-                    for (int i = 0; i < rectangles5.length; i++) {
+                    for (int i = 0; i < rectangles5.length; i++) {// this for loop handles all collisions with the rectangles in level 5
                         if (player1.intersects(rectangles5[i])) {
                             handleCollision(player1, rectangles5[i]);
                         }
                     }
 
 
-                    if (player1.intersects(l5b3)) {//player 1 collides with a block
+                    if (player1.intersects(l5b3)) {// this if statment handles a collision with an extra block in level 5
                         handleCollision(player1, l5b3);
                     }
-                    if (player1.intersects(l5b9)) {//player 1 collides with a block
+                    if (player1.intersects(l5b9)) {// this if statment handles a collision with an extra block in level 5
                         handleCollision(player1, l5b9);
                     }
                 }
@@ -623,30 +624,10 @@ public class Terp extends JComponent implements KeyListener {
         }
     }
 
-    void handleCollision2(Rectangle player, Rectangle block) {
-        Rectangle overlap = player.intersection(block);
-
-        if (overlap.height > overlap.width) {
-            if (player.x < block.x) {
-                player.x -= overlap.width;
-            } else if (player.x + player.width > block.x + block.width) {
-                player.x += overlap.width;
-            }
-        } else {
-            p1dy = 0;
-            if (player.y < block.y) {
-                player.y -= overlap.height;
-                p1inAir = false;
-            } else if (player.y + player.height > block.y + block.height) {
-                player.y += overlap.height;
-            }
-        }
-    }
-
     void racemode() {
     }
 
-    void drawSL1(Graphics g) {
+    void drawSL1(Graphics g) { // this method draws race level 1
         g.drawImage(background, 0, 0, null);
         g.setColor(Color.GREEN);
         g.drawImage(teemo, player1.x - camx, player1.y, null);
@@ -659,7 +640,7 @@ public class Terp extends JComponent implements KeyListener {
 
     }
 
-    void drawSL2(Graphics g) {
+    void drawSL2(Graphics g) { // this method draws race level 2
         g.drawImage(background, 0, 0, null);
         g.setColor(Color.GREEN);
         g.drawImage(teemo, player1.x - camx, player1.y, null);
@@ -671,7 +652,7 @@ public class Terp extends JComponent implements KeyListener {
         g.fillRect(0 - camx, 583, 100, 100);
     }
 
-    void drawSL3(Graphics g) {
+    void drawSL3(Graphics g) { // this method draws race level 3
         g.drawImage(background, 0, 0, null);
         g.setColor(Color.GREEN);
         g.drawImage(teemo, player1.x - camx, player1.y, null);
@@ -686,7 +667,7 @@ public class Terp extends JComponent implements KeyListener {
         g.fillRect(0 - camx, 583, 100, 100);
     }
 
-    void drawSL4(Graphics g) {
+    void drawSL4(Graphics g) { // this method draws race level 4
         g.drawImage(background, 0, 0, null);
         g.setColor(Color.GREEN);
         g.drawImage(teemo, player1.x - camx, player1.y - camy, null);
@@ -699,7 +680,7 @@ public class Terp extends JComponent implements KeyListener {
         g.fillRect(0 - camx, 583 - camy, 100, 100);
     }
 
-    void drawSL5(Graphics g) {
+    void drawSL5(Graphics g) { // this method draws race level 5
         g.drawImage(background, 0, 0, null);
         g.setColor(Color.GREEN);
         g.drawImage(teemo, player1.x - camx, player1.y, null);
@@ -712,7 +693,7 @@ public class Terp extends JComponent implements KeyListener {
         g.fillRect(0 - camx, 583, 100, 100);
     }
 
-    void drawRL1(Graphics g) {
+    void drawRL1(Graphics g) {// this method draws race level 1
         g.drawImage(rbackground, 0 - camx, 0, null);
         g.setColor(Color.RED);
         g.fillRect(player1.x - camx, player1.y, player1.width, player1.height);
