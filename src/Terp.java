@@ -62,12 +62,12 @@ public class Terp extends JComponent implements KeyListener {
     BufferedImage ENDpic = ImageHelper.loadImage("END.png");
     BufferedImage rmain = ImageHelper.loadImage("racemain.png");
     BufferedImage rbackground = ImageHelper.loadImage("rmodebackground.png");
+    BufferedImage rbackground1 = ImageHelper.loadImage("rmodebackground1.png");
     int screen = MAIN;
     boolean change = false;
     //players
     Rectangle player1 = new Rectangle(20, 550, 30, 30);
-    Rectangle player2 = new Rectangle(20, 550, 30, 30);
-    Rectangle player3 = new Rectangle(20, 550, 30, 30);
+    Rectangle player3 = new Rectangle(20, 240, 30, 30);
     //misc
     int ground = 550;
     int gravity = 2;
@@ -85,6 +85,8 @@ public class Terp extends JComponent implements KeyListener {
     boolean p1inAirs = false;
     boolean lvls = false;
     boolean count = false;
+    //race mode variables
+    
     //player 1 controls
     boolean p1jump = false;
     boolean p1left = false;
@@ -105,6 +107,7 @@ public class Terp extends JComponent implements KeyListener {
     boolean p3right = false;
     boolean p3inAir = false;
     int p3dy = 0;
+    
     //arrays for blocks
     Rectangle[] rectangles1 = {new Rectangle(150, 450, 50, 50), new Rectangle(100, 450, 50, 50), new Rectangle(250, 450, 50, 50), new Rectangle(450, 400, 50, 50), new Rectangle(400, 400, 50, 50), new Rectangle(600, 300, 50, 50),
         new Rectangle(550, 300, 50, 50), new Rectangle(750, 200, 50, 50), new Rectangle(1000, 400, 50, 50), new Rectangle(950, 400, 50, 50), new Rectangle(1050, 400, 50, 50), new Rectangle(1100, 400, 50, 50), new Rectangle(1150, 400, 50, 50)};
@@ -494,6 +497,45 @@ public class Terp extends JComponent implements KeyListener {
                 if (p3left) {//player 4 move left
                     player3.x = player3.x - speed;
                 }
+                
+                if (p3jump && !p3inAir){
+                    p3dy = -25;
+                    p3inAir = true;
+                }
+                
+                player3.y += p3dy;
+                
+                if(player3.y > 240){
+            
+                    player3.y = 240;
+                    p3dy = 0; 
+                    p3inAir = false; 
+                }
+                
+                if (p1jump && !p1inAir){
+                    p1dy = -25;
+                    p1inAir = true;
+                }
+                
+                player1.y += p1dy;
+                
+                if(player1.y > 550){
+            
+                    player1.y = 550;
+                    p1dy = 0; 
+                    p1inAir = false; 
+                }
+                
+                
+                if (player1.x <= 0){
+                    player1.x = 0;
+                }
+                
+                 if (player3.x <= 0){
+                    player3.x = 0;
+                }
+                        
+                
 
                 if (player1.x < WIDTH / 2) {
                     camx = 0;
@@ -694,12 +736,25 @@ public class Terp extends JComponent implements KeyListener {
     }
 
     void drawRL1(Graphics g) {// this method draws race level 1
-        g.drawImage(rbackground, 0 - camx, 0, null);
+        
+        g.drawImage(rbackground, 0 - camx, 280, null);
+        g.drawImage(rbackground1, 0 - camx3, -310, null);
+        g.setColor(Color.GREEN);
+        g.fillRect(0, 270, 3200, 20);
         g.setColor(Color.RED);
         g.fillRect(player1.x - camx, player1.y, player1.width, player1.height);
+        g.setColor(Color.BLACK);
         g.fillRect(player3.x - camx3, player3.y, player3.width, player3.height);
-
+        g.setColor(Color.RED);
+        g.fillRect(player1.x - camx3, player3.y, player3.width, player3.height);
+        g.setColor(Color.BLACK);
+        g.fillRect(player3.x - camx, player1.y, player3.width, player3.height);
+        
+        //player 1 is on the bottom
+        //player 1 uses w,a,d
+        //player 3 uses up,left,right
         g.setColor(Color.GREEN);
         g.fillRect(0, 580, 3200, 40);
+        g.setColor(Color.RED);
     }
 }
