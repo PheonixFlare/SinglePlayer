@@ -51,13 +51,14 @@ public class Terp extends JComponent implements KeyListener {
     BufferedImage b2 = ImageHelper.loadImage("50x50 block.png");
     BufferedImage b3 = ImageHelper.loadImage("35x400 block.png");
     BufferedImage b4 = ImageHelper.loadImage("20x400 block.png");
+    BufferedImage b5 = ImageHelper.loadImage("100x10 block.png");
+    BufferedImage b6 = ImageHelper.loadImage("40x40 block.png");
     BufferedImage lvlselect = ImageHelper.loadImage("lvlselect.png");
     BufferedImage nope = ImageHelper.loadImage("Nope_edited-1.png");
     BufferedImage teemo = ImageHelper.loadImage("teemo.png");
     BufferedImage howto = ImageHelper.loadImage("howto.png");
     BufferedImage finish = ImageHelper.loadImage("finish.png");
     BufferedImage gnar = ImageHelper.loadImage("gnar.png");
-    BufferedImage b5 = ImageHelper.loadImage("100x10 block.png");
     BufferedImage ENDpic = ImageHelper.loadImage("END.png");
     BufferedImage rmain = ImageHelper.loadImage("racemain.png");
     BufferedImage rbackground = ImageHelper.loadImage("rmodebackground.png");
@@ -105,41 +106,32 @@ public class Terp extends JComponent implements KeyListener {
     boolean p3inAir = false;
     int p3dy = 0;
     //arrays for blocks
-    Rectangle[] rectangles1 = {new Rectangle(150, 450, 50, 50), new Rectangle(100, 450, 50, 50), new Rectangle(250, 450, 50, 50), new Rectangle(450, 400, 50, 50), new Rectangle(400, 400, 50, 50), new Rectangle(600, 300, 50, 50), 
+    Rectangle[] rectangles1 = {new Rectangle(150, 450, 50, 50), new Rectangle(100, 450, 50, 50), new Rectangle(250, 450, 50, 50), new Rectangle(450, 400, 50, 50), new Rectangle(400, 400, 50, 50), new Rectangle(600, 300, 50, 50),
         new Rectangle(550, 300, 50, 50), new Rectangle(750, 200, 50, 50), new Rectangle(1000, 400, 50, 50), new Rectangle(950, 400, 50, 50), new Rectangle(1050, 400, 50, 50), new Rectangle(1100, 400, 50, 50), new Rectangle(1150, 400, 50, 50)};
     Rectangle[] rectangles2 = {new Rectangle(150, 250, 50, 10), new Rectangle(200, 250, 50, 10), new Rectangle(450, 450, 50, 10), new Rectangle(600, 400, 50, 10), new Rectangle(750, 150, 50, 10),
         new Rectangle(1000, 475, 50, 10), new Rectangle(1200, 400, 50, 10), new Rectangle(1250, 400, 50, 10), new Rectangle(1300, 400, 50, 10)};
     Rectangle[] rectangles3 = {new Rectangle(100, 500, 35, 400), new Rectangle(200, 400, 35, 400), new Rectangle(300, 325, 35, 400),
         new Rectangle(500, 500, 35, 400), new Rectangle(600, 350, 35, 400)};
-    Rectangle[] rectangles4 = { new Rectangle(100, 500, 50, 10), new Rectangle(0, 350, 50, 10), new Rectangle(100, 200, 50, 10), new Rectangle(0, 50, 50, 10), new Rectangle(100, -100, 50, 10), new Rectangle(300, -50, 50, 10), 
+    Rectangle[] rectangles4 = {new Rectangle(100, 500, 50, 10), new Rectangle(0, 350, 50, 10), new Rectangle(100, 200, 50, 10), new Rectangle(0, 50, 50, 10), new Rectangle(100, -100, 50, 10), new Rectangle(300, -50, 50, 10),
         new Rectangle(520, 150, 50, 10), new Rectangle(775, 400, 50, 10),};
-    Rectangle[] rectangles5 = {new Rectangle(100, 400, 30, 30), new Rectangle(220, 300, 30, 30), new Rectangle(350, 200, 40, 40), new Rectangle(350, -150, 40, 290),
-        new Rectangle(500, 450, 30, 30), new Rectangle(675, 300, 30, 30), new Rectangle(800, 300, 30, 30), new Rectangle(950, 525, 30, 30), new Rectangle(1150, 525, 30, 30), new Rectangle(1300, 530, 100, 30), new Rectangle(1400, 430, 50, 100)};
+    Rectangle[] rectangles5 = {new Rectangle(100, 400, 40, 40), new Rectangle(220, 300, 40, 40), new Rectangle(350, 200, 40, 40),
+        new Rectangle(500, 450, 40, 40), new Rectangle(675, 300, 40, 40), new Rectangle(800, 300, 40, 40), new Rectangle(950, 525, 40, 40), new Rectangle(1150, 525, 40, 40)};
     Rectangle[][] allRectangles = {rectangles1, rectangles2, rectangles3, rectangles4, rectangles5};
     int curLevel = 0;
-    //lvl 1
+    //lvl 1 misc block
     Rectangle l1finish = new Rectangle(1050, 300, 50, 100);
-    //lvl 2
+    //lvl 2 misc block
     Rectangle l2finish = new Rectangle(1250, 300, 50, 100);
-    //lvl 3 labeled as L4 but really L3
+    //lvl 3 labeled as L4 but really L3 misc blocks
     Rectangle l4b5 = new Rectangle(400, 200, 20, 400);
     Rectangle l4b9 = new Rectangle(800, 500, 200, 30);
-    Rectangle l4finish = new Rectangle(950, 400, 50, 100);
-//    
-    //lvl 4 labeled as L3 bu really L4
+    Rectangle l4finish = new Rectangle(950, 400, 50, 100);    
+    //lvl 4 labeled as L3 bu really L4 misc blocks
     Rectangle l3b0 = new Rectangle(150, -100, 50, 900);
     Rectangle l3b9 = new Rectangle(1000, 450, 200, 10);
     Rectangle l3finish = new Rectangle(1050, 350, 50, 100);
-    //lvl 5
-    Rectangle l5b0 = new Rectangle(100, 400, 40, 40);
-    Rectangle l5b1 = new Rectangle(220, 300, 40, 40);
-    Rectangle l5b2 = new Rectangle(350, 200, 40, 40);
+    //lvl 5 misc blocks
     Rectangle l5b3 = new Rectangle(350, -450, 40, 590);
-    Rectangle l5b4 = new Rectangle(500, 450, 40, 40);
-    Rectangle l5b5 = new Rectangle(675, 300, 40, 40);
-    Rectangle l5b6 = new Rectangle(800, 300, 40, 40);
-    Rectangle l5b7 = new Rectangle(950, 525, 40, 30);
-    Rectangle l5b8 = new Rectangle(1150, 525, 40, 30);
     Rectangle l5b9 = new Rectangle(1300, 530, 100, 30);
     //dialog boxes
     Object[] modeSelect = {"Single Player", "Co-Op", "Race Mode", "How To Play"};
@@ -189,21 +181,7 @@ public class Terp extends JComponent implements KeyListener {
 
         }
         if (screen == 9) {
-            g.drawImage(background, 0, 0, null);
-            g.setColor(Color.GREEN);
-            g.drawImage(teemo, player1.x - camx, player1.y , null);
-
-            g.fillRect(l5b0.x - camx, l5b0.y , l5b0.width, l5b0.height);
-            g.fillRect(l5b1.x - camx, l5b1.y , l5b1.width, l5b1.height);
-            g.fillRect(l5b2.x - camx, l5b2.y , l5b2.width, l5b2.height);
-            g.fillRect(l5b3.x - camx, l5b3.y , l5b3.width, l5b3.height);
-            g.fillRect(l5b4.x - camx, l5b4.y , l5b4.width, l5b4.height);
-            g.fillRect(l5b5.x - camx, l5b5.y , l5b5.width, l5b5.height);
-            g.fillRect(l5b6.x - camx, l5b6.y , l5b6.width, l5b6.height);
-            g.fillRect(l5b7.x - camx, l5b7.y , l5b7.width, l5b7.height);
-            g.fillRect(l5b8.x - camx, l5b8.y , l5b8.width, l5b8.height);
-            g.fillRect(l5b9.x - camx, l5b9.y , l5b9.width, l5b9.height);
-            g.fillRect(0 - camx, 583 , 100, 100);
+            drawSL5(g);
         }
         if (screen == END) {
             g.drawImage(ENDpic, 0, 0, null);
@@ -264,19 +242,19 @@ public class Terp extends JComponent implements KeyListener {
                 }
             } else if (screen == 2) {
                 l = (String) JOptionPane.showInputDialog(null, "Please select a level", "Level", JOptionPane.QUESTION_MESSAGE, null, lvlSelect, "Level Select");
-                if (l == lvlSelect[0]) {
+                if (l == lvlSelect[0]) {//level 1
                     screen = 3;
                     change = false;
-                } else if (l == lvlSelect[1]) {
+                } else if (l == lvlSelect[1]) {//level 2
                     screen = 4;
                     change = false;
-                } else if (l == lvlSelect[2]) {
+                } else if (l == lvlSelect[2]) {//level 3
                     screen = 5;
                     change = false;
-                } else if (l == lvlSelect[3]) {
+                } else if (l == lvlSelect[3]) {//level 4
                     screen = 8;
                     change = false;
-                } else if (l == lvlSelect[4]) {
+                } else if (l == lvlSelect[4]) {//level 5
                     screen = 9;
                     change = false;
                 }
@@ -305,8 +283,9 @@ public class Terp extends JComponent implements KeyListener {
                     change = false;
                 }
             }
-            if (screen == 11){
-                if(change){
+            if (screen == 11) {//if player is on the end and they hit the change button, the game goes to mode main screen 
+
+                if (change) {
                     screen = 0;
                     change = false;
                 }
@@ -326,7 +305,7 @@ public class Terp extends JComponent implements KeyListener {
 
                 //single player logic
 
-                if (player1.x < WIDTH / 2) {
+                if (player1.x < WIDTH / 2) { //camx logic
                     camx = 0;
                 } else {
                     camx = player1.x - WIDTH / 2;
@@ -339,25 +318,31 @@ public class Terp extends JComponent implements KeyListener {
                 //jumping and moving
                 p1dy = p1dy + gravity;
 
-                if (p1right && !p1inAirs) {//player 1 move right
+                if (p1right && !p1inAirs) {//player 1 move right as long as he/she is not sjumping
                     player1.x = player1.x + speed;
-//                for (Rectangle rect: rectangles)
+//                  for (Rectangle rect: allRectangles)
 //                {
-//                    if (player1.intersects(rect))
+//                      if (player1.intersects(rect))
 //                    {
-//                        player1.y = rect.x+rect.width;
+//                          player1.y = rect.x+rect.width;
 //                    }
 //                }
                 }
-                if (p1left && !p1inAirs) {//player 1 move left
+                if (p1left && !p1inAirs) {//player 1 move left as long as he/she is not sjumping
                     player1.x = player1.x - speed;
-
+//                  for (Rectangle rect: allRectangles)
+//                {
+//                      if (player1.intersects(rect))
+//                    {
+//                          player1.y = rect.x+rect.width;
+//                    }
+//                }
                 }
                 if (p1sjumpy > 0) {
                     p1dy = 0;
                     p1sjumpy -= gravity;
                 }
-                if (p1jump && !p1inAir) {
+                if (p1jump && !p1inAir) {//player 1 jumps
                     p1sjumping = false;
                     p1dy = -30;
                     p1inAir = true;
@@ -374,7 +359,7 @@ public class Terp extends JComponent implements KeyListener {
                     p1dy = 0;
                     p1inAir = false;
                 }
-                if (p1sjump & !p1sjumping & !p1inAir) {
+                if (p1sjump & !p1sjumping & !p1inAir) {//if player 1 sjumps and player 1 is not already sjumping and player 1 is not in the air then they can sjump
 
                     p1dy = 0;
                     p1sjumpy = 30;
@@ -392,15 +377,15 @@ public class Terp extends JComponent implements KeyListener {
 
                 }
                 if (screen == 3) {
-                    if (player1.y <= 0) {//cannot go into the cieling on level 1
+                    if (player1.y <= 0) {//cannot go into the ceiling on level 1
                         player1.y = 0;
                     }
                 } else if (screen == 4) {
-                    if (player1.y <= 0) {//cannot go into the cling on level 2
+                    if (player1.y <= 0) {//cannot go into the ceiling on level 2
                         player1.y = 0;
                     }
                 } else if (screen == 5) {
-                    if (player1.y <= 0) {//cannot go into cieling on level 3
+                    if (player1.y <= 0) {//cannot go into ceiling on level 3
                         player1.y = 0;
                     }
                 }
@@ -427,19 +412,19 @@ public class Terp extends JComponent implements KeyListener {
                     player1.x = 20;
                     player1.y = 550;
                 }
-                if (screen == 9 && player1.x == 1400) {
+                if (screen == 9 && player1.x == 1350) {//ends level 5 at 1400 and start the end screen 
                     screen = END;
                 }
 
 
-                //collisions
-                if (screen == 3) {
+                //collisions for single player
+                if (screen == 3) {//collisions for level 1
                     for (int i = 0; i < rectangles1.length; i++) {
                         if (player1.intersects(rectangles1[i])) {
                             handleCollision(player1, rectangles1[i]);
                         }
                     }
-                } else if (screen == 4) {
+                } else if (screen == 4) {//collisions for level 2
 
                     for (int i = 0; i < rectangles2.length; i++) {
                         if (player1.intersects(rectangles2[i])) {
@@ -448,97 +433,79 @@ public class Terp extends JComponent implements KeyListener {
                     }
 
                 }
-                if (screen == 5) {
+                if (screen == 5) {//collisions for level 3
                     for (int i = 0; i < rectangles3.length; i++) {
                         if (player1.intersects(rectangles3[i])) {
                             handleCollision(player1, rectangles3[i]);
                         }
                     }
 
-                    if (player1.intersects(l4b9)) {//player 1 collides with a block
+                    if (player1.intersects(l4b9)) {
                         handleCollision(player1, l4b9);
 
                     }
                 }
-                if (screen == 8) {
-                     for (int i = 0; i < rectangles4.length; i++) {
+                if (screen == 8) {//collisions for level 4
+                    for (int i = 0; i < rectangles4.length; i++) {
                         if (player1.intersects(rectangles4[i])) {
                             handleCollision(player1, rectangles4[i]);
                         }
                     }
-                    if (player1.intersects(l3b0)) {//player 1 collides with a block
+                    if (player1.intersects(l3b0)) {
                         handleCollision(player1, l3b0);
 
                     }
-                    if (player1.intersects(l3b9)) {//player 1 collides with a block
+                    if (player1.intersects(l3b9)) {
                         handleCollision(player1, l3b9);
 
                     }
                 }
-                if (screen == 9) {
+                if (screen == 9) {//collisions for level 5
+                    for (int i = 0; i < rectangles5.length; i++) {
+                        if (player1.intersects(rectangles5[i])) {
+                            handleCollision(player1, rectangles5[i]);
+                        }
+                    }
 
-                    if (player1.intersects(l5b0)) {//player 1 collides with a block
-                        handleCollision(player1, l5b0);
-                    }
-                    if (player1.intersects(l5b1)) {//player 1 collides with a block
-                        handleCollision(player1, l5b1);
-                    }
-                    if (player1.intersects(l5b2)) {//player 1 collides with a block
-                        handleCollision(player1, l5b2);
-                    }
+
                     if (player1.intersects(l5b3)) {//player 1 collides with a block
                         handleCollision(player1, l5b3);
-                    }
-                    if (player1.intersects(l5b4)) {//player 1 collides with a block
-                        handleCollision(player1, l5b4);
-                    }
-                    if (player1.intersects(l5b5)) {//player 1 collides with a block
-                        handleCollision(player1, l5b5);
-                    }
-                    if (player1.intersects(l5b6)) {//player 1 collides with a block
-                        handleCollision(player1, l5b6);
-                    }
-                    if (player1.intersects(l5b7)) {//player 1 collides with a block
-                        handleCollision(player1, l5b7);
-                    }
-                    if (player1.intersects(l5b8)) {//player 1 collides with a block
-                        handleCollision(player1, l5b8);
                     }
                     if (player1.intersects(l5b9)) {//player 1 collides with a block
                         handleCollision(player1, l5b9);
                     }
                 }
 
-            } else if (screen == 13 || screen == 14) {
-                
+            } else if (screen == 13 || screen == 14) {//this is race mode logic:
+
                 p1dy = p1dy + gravity;
                 p3dy = p3dy + gravity;
 
                 if (p1right) {//player 1 move right
                     player1.x = player1.x + speed;
                 }
-                if (p3right){//player 3 move right
+                if (p3right) {//player 3 move right
                     player3.x = player3.x + speed;
                 }
-                if (p1left){//player 1 move left
+                if (p1left) {//player 1 move left
                     player1.x = player1.x - speed;
                 }
-                if (p3left){//player 4 move left
+                if (p3left) {//player 4 move left
                     player3.x = player3.x - speed;
                 }
-                
+
                 if (player1.x < WIDTH / 2) {
                     camx = 0;
                 } else {
                     camx = player1.x - WIDTH / 2;
                 }
-                
+
                 if (player3.x < WIDTH / 2) {
                     camx3 = 0;
                 } else {
                     camx3 = player3.x - WIDTH / 2;
                 }
-                        
+
             }
 
 
@@ -718,16 +685,31 @@ public class Terp extends JComponent implements KeyListener {
         g.drawImage(finish, l4finish.x - camx, l4finish.y, null);
         g.fillRect(0 - camx, 583, 100, 100);
     }
-    void drawSL4(Graphics g){
-        g.drawImage(background, 0,0, null);
+
+    void drawSL4(Graphics g) {
+        g.drawImage(background, 0, 0, null);
         g.setColor(Color.GREEN);
         g.drawImage(teemo, player1.x - camx, player1.y - camy, null);
-        
+
         for (int i = 0; i < rectangles4.length; i++) {
             g.drawImage(b1, rectangles4[i].x - camx, rectangles4[i].y - camy, null);
         }
-        g.fillRect(l3b0.x - camx, l3b0.y -camy, l3b0.width, l3b0.height);
+        g.fillRect(l3b0.x - camx, l3b0.y - camy, l3b0.width, l3b0.height);
         g.fillRect(l3b9.x - camx, l3b9.y - camy, l3b9.width, l3b9.height);
+        g.fillRect(0 - camx, 583 - camy, 100, 100);
+    }
+
+    void drawSL5(Graphics g) {
+        g.drawImage(background, 0, 0, null);
+        g.setColor(Color.GREEN);
+        g.drawImage(teemo, player1.x - camx, player1.y, null);
+
+        for (int i = 0; i < rectangles5.length; i++) {
+            g.drawImage(b6, rectangles5[i].x - camx, rectangles5[i].y, null);
+        }
+        g.fillRect(l5b3.x - camx, l5b3.y, l5b3.width, l5b3.height);
+        g.fillRect(l5b9.x - camx, l5b9.y, l5b9.width, l5b9.height);
+        g.fillRect(0 - camx, 583, 100, 100);
     }
 
     void drawRL1(Graphics g) {
