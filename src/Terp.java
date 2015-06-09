@@ -43,6 +43,8 @@ public class Terp extends JComponent implements KeyListener {
     final int RMODE = 12;
     final int RLVL1 = 13;
     final int RLVL2 = 14;
+    final int RLVL1p1 = 15;
+    final int RLVL1p3 = 16;
     //images
     BufferedImage main = ImageHelper.loadImage("MainScreen.png");
     BufferedImage mode = ImageHelper.loadImage("Load Screen.png");
@@ -60,9 +62,11 @@ public class Terp extends JComponent implements KeyListener {
     BufferedImage finish = ImageHelper.loadImage("finish.png");
     BufferedImage gnar = ImageHelper.loadImage("gnar.png");
     BufferedImage ENDpic = ImageHelper.loadImage("END.png");
-    BufferedImage rmain = ImageHelper.loadImage("racemain.png");
+    BufferedImage rmain = ImageHelper.loadImage("racemainnew.png");
     BufferedImage rbackground = ImageHelper.loadImage("rmodebackground.png");
     BufferedImage rbackground1 = ImageHelper.loadImage("rmodebackground1.png");
+    BufferedImage rmodep1win = ImageHelper.loadImage("rmode p1win.png");
+    BufferedImage rmodep3win = ImageHelper.loadImage("rmode p2win.png");
     int screen = MAIN;
     boolean change = false;
     //players
@@ -86,7 +90,8 @@ public class Terp extends JComponent implements KeyListener {
     boolean lvls = false;
     boolean count = false;
     //race mode variables
-    
+    int p1diff = 0;
+    int p3diff = 0;
     //player 1 controls
     boolean p1jump = false;
     boolean p1left = false;
@@ -194,6 +199,12 @@ public class Terp extends JComponent implements KeyListener {
         }
         if (screen == RLVL1) {
             drawRL1(g);
+        }
+        if (screen == 15){
+            g.drawImage(rmodep1win, 0, 0, null);
+        }
+        if (screen == 16){
+            g.drawImage(rmodep3win, 0, 0, null);
         }
 
 
@@ -481,7 +492,18 @@ public class Terp extends JComponent implements KeyListener {
                 }
 
             } else if (screen == 13 || screen == 14) {//this is race mode logic:
-
+                
+                p1diff = player1.x - player3.x;
+                
+                p3diff = player3.x - player1.x;
+                
+                if(p3diff >= 400){
+                    screen = 15;
+                }
+                if(p1diff >= 400){
+                    screen = 16;
+                }
+                
                 p1dy = p1dy + gravity;
                 p3dy = p3dy + gravity;
 
@@ -741,14 +763,16 @@ public class Terp extends JComponent implements KeyListener {
         g.drawImage(rbackground1, 0 - camx3, -310, null);
         g.setColor(Color.GREEN);
         g.fillRect(0, 270, 3200, 20);
-        g.setColor(Color.RED);
-        g.fillRect(player1.x - camx, player1.y, player1.width, player1.height);
+
         g.setColor(Color.BLACK);
         g.fillRect(player3.x - camx3, player3.y, player3.width, player3.height);
         g.setColor(Color.RED);
-        g.fillRect(player1.x - camx3, player3.y, player3.width, player3.height);
+        g.fillRect(player1.x - camx3, player1.y - 300, player3.width, player3.height);
+        
+        g.setColor(Color.RED);
+        g.fillRect(player1.x - camx, player1.y, player1.width, player1.height);
         g.setColor(Color.BLACK);
-        g.fillRect(player3.x - camx, player1.y, player3.width, player3.height);
+        g.fillRect(player3.x - camx, player3.y + 300, player3.width, player3.height);
         
         //player 1 is on the bottom
         //player 1 uses w,a,d
