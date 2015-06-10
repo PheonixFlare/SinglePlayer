@@ -113,7 +113,7 @@ public class Terp extends JComponent implements KeyListener {
     boolean p3inAir = false;
     int p3dy = 0;
     
-    //arrays for blocks
+    //arrays for blocks in single player
     Rectangle[] rectangles1 = {new Rectangle(150, 450, 50, 50), new Rectangle(100, 450, 50, 50), new Rectangle(250, 450, 50, 50), new Rectangle(450, 400, 50, 50), new Rectangle(400, 400, 50, 50), new Rectangle(600, 300, 50, 50),
         new Rectangle(550, 300, 50, 50), new Rectangle(750, 200, 50, 50), new Rectangle(1000, 400, 50, 50), new Rectangle(950, 400, 50, 50), new Rectangle(1050, 400, 50, 50), new Rectangle(1100, 400, 50, 50), new Rectangle(1150, 400, 50, 50)};
     Rectangle[] rectangles2 = {new Rectangle(150, 250, 50, 10), new Rectangle(200, 250, 50, 10), new Rectangle(450, 450, 50, 10), new Rectangle(600, 400, 50, 10), new Rectangle(750, 150, 50, 10),
@@ -141,6 +141,9 @@ public class Terp extends JComponent implements KeyListener {
     //lvl 5 misc blocks
     Rectangle l5b3 = new Rectangle(350, -450, 40, 590);
     Rectangle l5b9 = new Rectangle(1300, 530, 100, 30);
+    //end of single player blocks/rectangles
+    //start of race mode blocks/rectagnles
+    
     //dialog boxes
     Object[] modeSelect = {"Single Player", "Co-Op", "Race Mode", "How To Play"};
     Object[] lvlSelect = {"1", "2", "3", "4", "5"};
@@ -298,6 +301,20 @@ public class Terp extends JComponent implements KeyListener {
                 }
             }
             if (screen == 11) {//if player is on the end and they hit the change button, the game goes to mode main screen 
+
+                if (change) {
+                    screen = 0;
+                    change = false;
+                }
+            }
+            if (screen == 15) {//if player is on the end and they hit the change button, the game goes to mode main screen 
+
+                if (change) {
+                    screen = 0;
+                    change = false;
+                }
+            }
+            if (screen == 16) {//if player is on the end and they hit the change button, the game goes to mode main screen 
 
                 if (change) {
                     screen = 0;
@@ -497,10 +514,18 @@ public class Terp extends JComponent implements KeyListener {
                 
                 p3diff = player3.x - player1.x;
                 
-                if(p3diff >= 400){
+                if(p3diff >= 425 || player1.x == 2800 ){
+                    player1.x = 20;
+                    player1.y = 550;
+                    player3.x = 20;
+                    player3.y = 240;
                     screen = 15;
                 }
-                if(p1diff >= 400){
+                if(p1diff >= 425 || player3.x == 2800){
+                    player1.x = 20;
+                    player1.y = 550;
+                    player3.x = 20;
+                    player3.y = 240;
                     screen = 16;
                 }
                 
@@ -763,16 +788,17 @@ public class Terp extends JComponent implements KeyListener {
         g.drawImage(rbackground1, 0 - camx3, -310, null);
         g.setColor(Color.GREEN);
         g.fillRect(0, 270, 3200, 20);
+        
 
         g.setColor(Color.BLACK);
         g.fillRect(player3.x - camx3, player3.y, player3.width, player3.height);
         g.setColor(Color.RED);
-        g.fillRect(player1.x - camx3, player1.y - 300, player3.width, player3.height);
+        g.fillRect(player1.x - camx3, player1.y - 310, player3.width, player3.height);
         
         g.setColor(Color.RED);
         g.fillRect(player1.x - camx, player1.y, player1.width, player1.height);
         g.setColor(Color.BLACK);
-        g.fillRect(player3.x - camx, player3.y + 300, player3.width, player3.height);
+        g.fillRect(player3.x - camx, player3.y + 310, player3.width, player3.height);
         
         //player 1 is on the bottom
         //player 1 uses w,a,d
@@ -780,5 +806,7 @@ public class Terp extends JComponent implements KeyListener {
         g.setColor(Color.GREEN);
         g.fillRect(0, 580, 3200, 40);
         g.setColor(Color.RED);
+        g.drawImage(finish, 2800 - camx, 480, null);
+        g.drawImage(finish, 2800 - camx3, 170, null);
     }
 }
