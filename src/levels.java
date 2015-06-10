@@ -60,7 +60,7 @@ public class levels extends JComponent implements KeyListener{
     Rectangle r12 = new Rectangle(0, 0, 0, 0);
     Rectangle r13 = new Rectangle(0, 0, 0, 0);
     Rectangle r14 = new Rectangle(0, 0, 0, 0);
-    Rectangle r15= new Rectangle(0, 0, 0, 0);
+    Rectangle r15 = new Rectangle(0, 0, 0, 0);
     Rectangle r16 = new Rectangle(0, 0, 0, 0);
     Rectangle r17 = new Rectangle(0, 0, 0, 0);
     Rectangle r18 = new Rectangle(0, 0, 0, 0);
