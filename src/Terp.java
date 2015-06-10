@@ -41,6 +41,8 @@ public class Terp extends JComponent implements KeyListener {
     final int NOPE = 7;
     final int END = 11;
     final int SLOSE = 17;
+    final int HINT = 18;
+    final int TUT = 19;
     final int RMODE = 12;
     final int RLVL1 = 13;
     final int RLVL2 = 14;
@@ -57,7 +59,7 @@ public class Terp extends JComponent implements KeyListener {
     BufferedImage b4 = ImageHelper.loadImage("20x400 block.png");
     BufferedImage b5 = ImageHelper.loadImage("100x10 block.png");
     BufferedImage b6 = ImageHelper.loadImage("40x40 block.png");
-    BufferedImage lvlselect = ImageHelper.loadImage("lvlselect.png");
+    BufferedImage lvlselect = ImageHelper.loadImage("lvlselectnew.png");
     BufferedImage nope = ImageHelper.loadImage("Nope_edited-1.png");
     BufferedImage teemo = ImageHelper.loadImage("teemo.png");
     BufferedImage howto = ImageHelper.loadImage("howto.png");
@@ -69,6 +71,9 @@ public class Terp extends JComponent implements KeyListener {
     BufferedImage rbackground1 = ImageHelper.loadImage("rmodebackground1.png");
     BufferedImage rmodep1win = ImageHelper.loadImage("rmode p1win.png");
     BufferedImage rmodep3win = ImageHelper.loadImage("rmode p2win.png");
+    BufferedImage slose = ImageHelper.loadImage("slose.png");
+    BufferedImage hint = ImageHelper.loadImage("hintnew.png");
+    BufferedImage congrats = ImageHelper.loadImage("tutorial.png");
     int screen = MAIN;
     boolean change = false;
     //players
@@ -93,6 +98,7 @@ public class Terp extends JComponent implements KeyListener {
     boolean lvls = false;
     boolean count = false;
     int slives = 7;
+    boolean hintchange = false;
     //race mode variables
     int p1diff = 0;
     int p3diff = 0;
@@ -150,7 +156,7 @@ public class Terp extends JComponent implements KeyListener {
     
     //dialog boxes
     Object[] modeSelect = {"Single Player", "Co-Op", "Race Mode", "How To Play"};
-    Object[] lvlSelect = {"1", "2", "3", "4", "5"};
+    Object[] lvlSelect = {"Tutorial Level", "1", "2", "3", "4"};
     Object[] rmodeSelect = {"1", "2"};
     // drawing of the game happens in here
     // we use the Graphics object, g, to perform the drawing
@@ -213,6 +219,16 @@ public class Terp extends JComponent implements KeyListener {
         if (screen == 16){
             g.drawImage(rmodep3win, 0, 0, null);
         }
+        if (screen == 17){
+            g.drawImage(slose, 0, 0, null);
+        }
+        if (screen == 18){
+            g.drawImage(hint, 0, 0, null);
+        }
+        if (screen == 19){
+            g.drawImage(congrats, 0, 0, null);
+        }
+        
 
 
         // GAME DRAWING ENDS HERE
@@ -247,7 +263,7 @@ public class Terp extends JComponent implements KeyListener {
                     change = false;
                 }
             } else if (screen == 1) {
-                s = (String) JOptionPane.showInputDialog(null, "Please select a mode", "Mode", JOptionPane.QUESTION_MESSAGE, null, modeSelect, "Single Player");
+                s = (String) JOptionPane.showInputDialog(null, "Please select a mode", "Mode Select", JOptionPane.QUESTION_MESSAGE, null, modeSelect, "Single Player");
                 if (s == modeSelect[0]) {
                     screen = 2;
                     change = false;
@@ -262,7 +278,7 @@ public class Terp extends JComponent implements KeyListener {
                     change = false;
                 }
             } else if (screen == 2) {
-                l = (String) JOptionPane.showInputDialog(null, "Please select a level", "Level", JOptionPane.QUESTION_MESSAGE, null, lvlSelect, "Level Select");
+                l = (String) JOptionPane.showInputDialog(null, "Please select a level", "Level Select", JOptionPane.QUESTION_MESSAGE, null, lvlSelect, "Level Select");
                 if (l == lvlSelect[0]) {//level 1
                     screen = 3;
                     change = false;
@@ -334,6 +350,21 @@ public class Terp extends JComponent implements KeyListener {
                     screen = 0;
                     change = false;
                     slives = 5;
+                }
+            }
+            if (screen == 18){
+                if(change){
+                    screen = 4;
+                    change = false;
+                }
+            }
+            if (screen == 19){
+                if(hintchange){
+                    screen = 18;
+                    hintchange = false;
+                }else if(change){
+                    screen = 4;
+                    change = false;
                 }
             }
 
@@ -450,7 +481,7 @@ public class Terp extends JComponent implements KeyListener {
                     player1.x = 0;
                 }
                 if (screen == 3 && player1.x == 1050) {//ends lvl 1 at 1050 coords and starts lvl 2
-                    screen = LVL2;
+                    screen = TUT;
                     player1.x = 20;
                     player1.y = 550;
                 }
@@ -539,14 +570,14 @@ public class Terp extends JComponent implements KeyListener {
                 
                 p3diff = player3.x - player1.x;
                 
-                if(p3diff >= 425 || player1.x == 2800 ){
+                if(p3diff >= 415 || player1.x == 2800 ){
                     player1.x = 20;
                     player1.y = 550;
                     player3.x = 20;
                     player3.y = 240;
                     screen = 15;
                 }
-                if(p1diff >= 425 || player3.x == 2800){
+                if(p1diff >= 415 || player3.x == 2800){
                     player1.x = 20;
                     player1.y = 550;
                     player3.x = 20;
@@ -695,6 +726,8 @@ public class Terp extends JComponent implements KeyListener {
             p3left = true;
         } else if (keyCode == KeyEvent.VK_RIGHT) {
             p3right = true;
+        } else if (keyCode == KeyEvent.VK_H){
+            hintchange = true;
         }
     }
 
