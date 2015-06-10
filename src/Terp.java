@@ -40,11 +40,13 @@ public class Terp extends JComponent implements KeyListener {
     final int LVL5 = 9;
     final int NOPE = 7;
     final int END = 11;
+    final int SLOSE = 17;
     final int RMODE = 12;
     final int RLVL1 = 13;
     final int RLVL2 = 14;
     final int RLVL1p1 = 15;
     final int RLVL1p3 = 16;
+    
     //images
     BufferedImage main = ImageHelper.loadImage("MainScreen.png");
     BufferedImage mode = ImageHelper.loadImage("Load Screen.png");
@@ -76,6 +78,7 @@ public class Terp extends JComponent implements KeyListener {
     int ground = 550;
     int gravity = 2;
     boolean sjumpEnd = false;
+    int speedlvl1 = 4;
     int speed = 5;
     int camx = 0;
     int camy = 0;
@@ -89,6 +92,7 @@ public class Terp extends JComponent implements KeyListener {
     boolean p1inAirs = false;
     boolean lvls = false;
     boolean count = false;
+    int slives = 5;
     //race mode variables
     int p1diff = 0;
     int p3diff = 0;
@@ -156,7 +160,7 @@ public class Terp extends JComponent implements KeyListener {
     public void paintComponent(Graphics g) {
 //        for (int i =0; i < allRectangles[curLevel].length; i ++)
 //        {
-//
+//           allRectangles[curLevel][i].intersects(player1);
 //        }
         // always clear the screen first!
         g.clearRect(0, 0, WIDTH, HEIGHT);
@@ -303,8 +307,12 @@ public class Terp extends JComponent implements KeyListener {
             if (screen == 11) {//if player is on the end and they hit the change button, the game goes to mode main screen 
 
                 if (change) {
+                    player1.x = 20;
+                    player1.y = 550;
                     screen = 0;
                     change = false;
+                    slives = 5;
+                    
                 }
             }
             if (screen == 15) {//if player is on the end and they hit the change button, the game goes to mode main screen 
@@ -321,9 +329,20 @@ public class Terp extends JComponent implements KeyListener {
                     change = false;
                 }
             }
+            if (screen == 17){
+                if (change){
+                    screen = 0;
+                    change = false;
+                    slives = 5;
+                }
+            }
 
             if (screen == 3 || screen == 4 || screen == 5 || screen == 8 || screen == 9 || screen == 10) { //if the player is in single player mode         
-
+                
+                if (slives == 0){
+                    screen = 17;
+                }
+                
                 if (screen == 3) {//players cant stall jump on level 1
                     p1sjump = false;
                 }
@@ -358,6 +377,11 @@ public class Terp extends JComponent implements KeyListener {
 //                          player1.y = rect.x+rect.width;
 //                    }
 //                }
+//                  
+//                    
+//                        for (int j = 0; j < allRectangles[curLevel].length; j++) {
+//                            
+//                        }                   
                 }
                 if (p1left && !p1inAirs) {//player 1 move left as long as he/she is not sjumping
                     player1.x = player1.x - speed;
@@ -405,6 +429,7 @@ public class Terp extends JComponent implements KeyListener {
                 //lvl data and commands
                 if (player1.x >= 100 && player1.y == 550) {//if the player hits the ground he/she is sent back to start
                     player1.x = 20;
+                    slives = slives - 1;
                     
 
                 }
@@ -726,6 +751,7 @@ public class Terp extends JComponent implements KeyListener {
         }
         g.drawImage(finish, l1finish.x - camx, l1finish.y, null);
         g.fillRect(0 - camx, 583, 100, 100);
+        g.drawString("You have " + slives + " lives left", 20, 20);
 
     }
 
@@ -739,6 +765,7 @@ public class Terp extends JComponent implements KeyListener {
 
         g.drawImage(finish, l2finish.x - camx, l2finish.y, null);
         g.fillRect(0 - camx, 583, 100, 100);
+        g.drawString("You have " + slives + " lives left", 20, 20);
     }
 
     void drawSL3(Graphics g) { // this method draws race level 3
@@ -754,6 +781,7 @@ public class Terp extends JComponent implements KeyListener {
         g.fillRect(l4b9.x - camx, l4b9.y, l4b9.width, l4b9.height);
         g.drawImage(finish, l4finish.x - camx, l4finish.y, null);
         g.fillRect(0 - camx, 583, 100, 100);
+        g.drawString("You have " + slives + " lives left", 20, 20);
     }
 
     void drawSL4(Graphics g) { // this method draws race level 4
@@ -767,6 +795,7 @@ public class Terp extends JComponent implements KeyListener {
         g.fillRect(l3b0.x - camx, l3b0.y - camy, l3b0.width, l3b0.height);
         g.fillRect(l3b9.x - camx, l3b9.y - camy, l3b9.width, l3b9.height);
         g.fillRect(0 - camx, 583 - camy, 100, 100);
+        g.drawString("You have " + slives + " lives left", 20, 20);
     }
 
     void drawSL5(Graphics g) { // this method draws race level 5
@@ -780,6 +809,7 @@ public class Terp extends JComponent implements KeyListener {
         g.fillRect(l5b3.x - camx, l5b3.y, l5b3.width, l5b3.height);
         g.fillRect(l5b9.x - camx, l5b9.y, l5b9.width, l5b9.height);
         g.fillRect(0 - camx, 583, 100, 100);
+        g.drawString("You have " + slives + " lives left", 20, 20);
     }
 
     void drawRL1(Graphics g) {// this method draws race level 1
