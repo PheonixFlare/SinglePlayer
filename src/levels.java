@@ -46,24 +46,7 @@ public class levels extends JComponent implements KeyListener{
     
     Rectangle player = new Rectangle(20, 550, 30, 30);
     
-    Rectangle r1 = new Rectangle(0, 0, 0, 0);
-    Rectangle r2= new Rectangle(0, 0, 0, 0);
-    Rectangle r3 = new Rectangle(0, 0, 0, 0);
-    Rectangle r4 = new Rectangle(0, 0, 0, 0);
-    Rectangle r5 = new Rectangle(0, 0, 0, 0);
-    Rectangle r6 = new Rectangle(0, 0, 0, 0);
-    Rectangle r7 = new Rectangle(0, 0, 0, 0);
-    Rectangle r8 = new Rectangle(0, 0, 0, 0);
-    Rectangle r9 = new Rectangle(0, 0, 0, 0);
-    Rectangle r10 = new Rectangle(0, 0, 0, 0);
-    Rectangle r11 = new Rectangle(0, 0, 0, 0);
-    Rectangle r12 = new Rectangle(0, 0, 0, 0);
-    Rectangle r13 = new Rectangle(0, 0, 0, 0);
-    Rectangle r14 = new Rectangle(0, 0, 0, 0);
-    Rectangle r15 = new Rectangle(0, 0, 0, 0);
-    Rectangle r16 = new Rectangle(0, 0, 0, 0);
-    Rectangle r17 = new Rectangle(0, 0, 0, 0);
-    Rectangle r18 = new Rectangle(0, 0, 0, 0);
+
     
     
     
@@ -83,18 +66,8 @@ public class levels extends JComponent implements KeyListener{
         g.fillRect(base2.x, base2.y, base2.width, base2.height);
         g.fillRect(player.x - camx, player.y - camy, player.height, player.width);
         
-        g.fillRect(r1.x - camx , r1.y - camy , r1.width , r1.height);
-        g.fillRect(r2.x - camx , r2.y - camy , r2.width , r2.height);
-        g.fillRect(r3.x - camx , r3.y - camy , r3.width , r3.height);
-        g.fillRect(r4.x - camx , r4.y - camy , r4.width , r4.height);
-        g.fillRect(r5.x - camx , r5.y - camy , r5.width , r5.height);
-        g.fillRect(r6.x - camx , r6.y - camy , r6.width , r6.height);
-        g.fillRect(r7.x - camx , r7.y - camy , r7.width , r7.height);
-        g.fillRect(r8.x - camx , r8.y - camy , r8.width , r8.height);
-        g.fillRect(r9.x - camx , r9.y - camy , r9.width , r9.height);
-        g.fillRect(r10.x - camx , r10.y - camy , r10.width , r10.height);
         
-        
+         Rectangle[] recrace1 = { new Rectangle (), new Rectangle ()};
         
         
         

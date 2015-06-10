@@ -92,7 +92,7 @@ public class Terp extends JComponent implements KeyListener {
     boolean p1inAirs = false;
     boolean lvls = false;
     boolean count = false;
-    int slives = 5;
+    int slives = 7;
     //race mode variables
     int p1diff = 0;
     int p3diff = 0;
