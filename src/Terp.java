@@ -78,7 +78,7 @@ public class Terp extends JComponent implements KeyListener {
     boolean change = false;
     //players
     Rectangle player1 = new Rectangle(20, 550, 30, 30);
-    Rectangle player3 = new Rectangle(20, 240, 30, 30);
+    Rectangle player3 = new Rectangle(20, 250, 30, 30);
     //misc
     int ground = 550;
     int gravity = 2;
@@ -155,12 +155,14 @@ public class Terp extends JComponent implements KeyListener {
     //end of single player blocks/rectangles
     //start of race mode blocks/rectagnles
     
-    Rectangle[] recrace1 = { new Rectangle (200, 505, 40, 75), new Rectangle (500, 480, 50, 100),new Rectangle (750, 530, 20, 50),new Rectangle (900, 400, 500, 180), new Rectangle (850, 540, 50, 40), new Rectangle(1000, 350, 50, 50),new Rectangle (1150, 330, 30, 100),new Rectangle (1300, 350, 50, 50),new Rectangle (0, 0, 0, 0),
+    Rectangle[] recrace1 = { new Rectangle (0, 0, 0, 0), new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0), new Rectangle (0, 0, 0, 0), new Rectangle(0, 0, 0, 0),new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),
     new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),
     new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),};
-    Rectangle base1 = new Rectangle (0, 270, 3200, 20);
-    Rectangle base2 = new Rectangle (0, 580, 3200, 40);
+    Rectangle base1 = new Rectangle (0, 280, 3200, 20);
+    Rectangle base2 = new Rectangle (0, 580, 3200, 20);
+    Rectangle top = new Rectangle (10,-10,3200,10);
     
+    Rectangle[] recrace1b;
     
     //dialog boxes
     Object[] modeSelect = {"Single Player", "Co-Op", "Race Mode", "How To Play"};
@@ -254,6 +256,13 @@ public class Terp extends JComponent implements KeyListener {
 //        }
         // the main game loop section
         // game will end if you set done = false;
+        recrace1b = new Rectangle[recrace1.length];
+        for(int i = 0; i < recrace1.length; i++)
+        {
+            recrace1b[i] = (Rectangle)recrace1[i].clone();
+            recrace1b[i].y -= 300;
+        }
+        
         boolean done = false;
         while (!done) {
             // determines when we started so we can keep a framerate
@@ -674,21 +683,32 @@ public class Terp extends JComponent implements KeyListener {
                         }
                     }
                     if (player1.intersects(base1)) {// this if statment handles a collision with an extra block in level 4
-                        handleCollision(player1, l3b0);
+                        handleCollision(player1, base1);
 
                     }
                     if (player1.intersects(base2)) {// this if statment handles a collision with an extra block in level 4
-                        handleCollision(player1, l3b9);
+                        handleCollision(player1, base2);
 
                     }
                 }
                 if (screen == 13) {//collisions for race level 1
-                    for (int i = 0; i < recrace1.length; i++) { // this for loop handles all collisions with the rectangles in level 1
-                        Rectangle test = new Rectangle(recrace1[i].x, recrace1[i].y - 310 , recrace1[i].width, recrace1[i].height);
-                        if (player3.intersects(test)) {
+                    for (int i = 0; i < recrace1b.length; i++) { // this for loop handles all collisions with the rectangles in level 1
+                        if (player3.intersects(recrace1b[i])) {
                             
-                            handleCollision(player3, test);
+                            handleCollision2(player3, recrace1b[i]);
                         }
+                    }
+                    if (player1.intersects(base1)) {// this if statment handles a collision with an extra block in level 4
+                        handleCollision2(player3, base1);
+
+                    }
+                    if (player1.intersects(base2)) {// this if statment handles a collision with an extra block in level 4
+                        handleCollision2(player3, base2);
+
+                    }
+                     if (player1.intersects(top)) {// this if statment handles a collision with an extra block in level 4
+                        handleCollision(player1, top);
+
                     }
                 }
                 
@@ -813,9 +833,24 @@ public class Terp extends JComponent implements KeyListener {
             p1dy = 0;
         }
     }
+    void handleCollision2(Rectangle player, Rectangle block) {
+        Rectangle overlap = player.intersection(block);
 
-
-    void racemode() {
+        if (overlap.height > overlap.width) {
+            if (player.x < block.x) {
+                player.x -= overlap.width;
+            } else if (player.x + player.width > block.x + block.width) {
+                player.x += overlap.width;
+            }
+        } else {
+            if (p3dy > 0) {
+                player.y -= overlap.height;
+                p3inAir = false;
+            } else {
+                player.y += overlap.height;
+            }
+            p3dy = 0;
+        }
     }
 
     void drawSL1(Graphics g) { // this method draws race level 1
@@ -894,31 +929,31 @@ public class Terp extends JComponent implements KeyListener {
         g.drawImage(rbackground, 0 - camx, 280, null);
         g.drawImage(rbackground1, 0 - camx3, -310, null);
         g.setColor(Color.GREEN);
-        g.fillRect(0, 270, 3200, 20);
+        g.fillRect(base1.x, base1.y, base1.width, base1.height);
+        g.fillRect(base2.x, base2.y, base2.width, base2.height);
         
         for (int i = 0; i < recrace1.length; i++) {
-            g.fillRect(recrace1[i].x - camx, recrace1[i].y, recrace1[i].width, recrace1[i].height);
+            g.fillRect(recrace1b[i].x - camx3, recrace1b[i].y, recrace1b[i].width, recrace1b[i].height);
         }
         for (int i = 0; i < recrace1.length; i++) {
-            g.fillRect(recrace1[i].x - camx, recrace1[i].y - 310, recrace1[i].width, recrace1[i].height);
+            g.fillRect(recrace1[i].x - camx, recrace1[i].y, recrace1[i].width, recrace1[i].height);
         }
         
 
         g.setColor(Color.BLACK);
         g.fillRect(player3.x - camx3, player3.y, player3.width, player3.height);
         g.setColor(Color.RED);
-        g.fillRect(player1.x - camx3, player1.y - 310, player3.width, player3.height);
+        g.fillRect(player1.x - camx3, player1.y - 300, player3.width, player3.height);
         
         g.setColor(Color.RED);
         g.fillRect(player1.x - camx, player1.y, player1.width, player1.height);
         g.setColor(Color.BLACK);
-        g.fillRect(player3.x - camx, player3.y + 310, player3.width, player3.height);
+        g.fillRect(player3.x - camx, player3.y + 300, player3.width, player3.height);
         
         //player 1 is on the bottom
         //player 1 uses w,a,d
         //player 3 uses up,left,right
         g.setColor(Color.GREEN);
-        g.fillRect(0, 580, 3200, 40);
         g.setColor(Color.RED);
         g.drawImage(finish, 2800 - camx, 480, null);
         g.drawImage(finish, 2800 - camx3, 170, null);
