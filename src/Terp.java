@@ -85,6 +85,7 @@ public class Terp extends JComponent implements KeyListener {
     boolean sjumpEnd = false;
     int speedlvl1 = 4;
     int speed = 5;
+    int speed2 = 4;
     int camx = 0;
     int camy = 0;
     int camx3 = 0;
@@ -153,6 +154,13 @@ public class Terp extends JComponent implements KeyListener {
     Rectangle l5b9 = new Rectangle(1300, 530, 100, 30);
     //end of single player blocks/rectangles
     //start of race mode blocks/rectagnles
+    
+    Rectangle[] recrace1 = { new Rectangle (200, 505, 40, 75), new Rectangle (500, 480, 50, 100),new Rectangle (750, 530, 20, 50),new Rectangle (900, 400, 500, 180), new Rectangle (850, 540, 50, 40), new Rectangle(1000, 350, 50, 50),new Rectangle (1150, 330, 30, 100),new Rectangle (1300, 350, 50, 50),new Rectangle (0, 0, 0, 0),
+    new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),
+    new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),};
+    Rectangle base1 = new Rectangle (0, 270, 3200, 20);
+    Rectangle base2 = new Rectangle (0, 580, 3200, 40);
+    
     
     //dialog boxes
     Object[] modeSelect = {"Single Player", "Co-Op", "Race Mode", "How To Play"};
@@ -651,6 +659,41 @@ public class Terp extends JComponent implements KeyListener {
                 } else {
                     camx3 = player3.x - WIDTH / 2;
                 }
+                
+                
+                
+                
+                
+                
+                
+                
+                if (screen == 13) {//collisions for race level 1
+                    for (int i = 0; i < recrace1.length; i++) { // this for loop handles all collisions with the rectangles in level 1
+                        if (player1.intersects(recrace1[i])) {
+                            handleCollision(player1, recrace1[i]);
+                        }
+                    }
+                    if (player1.intersects(base1)) {// this if statment handles a collision with an extra block in level 4
+                        handleCollision(player1, l3b0);
+
+                    }
+                    if (player1.intersects(base2)) {// this if statment handles a collision with an extra block in level 4
+                        handleCollision(player1, l3b9);
+
+                    }
+                }
+                if (screen == 13) {//collisions for race level 1
+                    for (int i = 0; i < recrace1.length; i++) { // this for loop handles all collisions with the rectangles in level 1
+                        Rectangle test = new Rectangle(recrace1[i].x, recrace1[i].y - 310 , recrace1[i].width, recrace1[i].height);
+                        if (player3.intersects(test)) {
+                            
+                            handleCollision(player3, test);
+                        }
+                    }
+                }
+                
+                
+                
 
             }
 
@@ -771,6 +814,7 @@ public class Terp extends JComponent implements KeyListener {
         }
     }
 
+
     void racemode() {
     }
 
@@ -851,6 +895,13 @@ public class Terp extends JComponent implements KeyListener {
         g.drawImage(rbackground1, 0 - camx3, -310, null);
         g.setColor(Color.GREEN);
         g.fillRect(0, 270, 3200, 20);
+        
+        for (int i = 0; i < recrace1.length; i++) {
+            g.fillRect(recrace1[i].x - camx, recrace1[i].y, recrace1[i].width, recrace1[i].height);
+        }
+        for (int i = 0; i < recrace1.length; i++) {
+            g.fillRect(recrace1[i].x - camx, recrace1[i].y - 310, recrace1[i].width, recrace1[i].height);
+        }
         
 
         g.setColor(Color.BLACK);

@@ -46,8 +46,13 @@ public class levels extends JComponent implements KeyListener{
     
     Rectangle player = new Rectangle(20, 550, 30, 30);
     
-
     
+    Rectangle[] recrace1 = { new Rectangle (200, 505, 40, 75), new Rectangle (500, 480, 50, 100),new Rectangle (750, 530, 20, 50),new Rectangle (900, 400, 500, 180), new Rectangle (850, 540, 50, 40), new Rectangle(1000, 350, 50, 50),new Rectangle (1150, 330, 30, 100),new Rectangle (1300, 350, 50, 50),new Rectangle (0, 0, 0, 0),
+    new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),
+    new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),};
+
+    //base 1: 0, 580, 3200, 40 base 1: 0, 580, 3200, 40 base 1: 0, 580, 3200, 40 base 1: 0, 580, 3200, 40 base 1: 0, 580, 3200, 40 base 1: 0, 580, 3200, 40 base 1: 0, 580, 3200, 40 base 1: 0, 580, 3200, 40 base 1: 0, 580, 3200, 40 base 1: 0, 580, 3200, 40 
+    //base 2: 0, 270, 3200, 40 base 2: 0, 270, 3200, 40 base 2: 0, 270, 3200, 40 base 2: 0, 270, 3200, 40 base 2: 0, 270, 3200, 40 base 2: 0, 270, 3200, 40 base 2: 0, 270, 3200, 40 base 2: 0, 270, 3200, 40 base 2: 0, 270, 3200, 40 base 2: 0, 270, 3200, 40
     
     
 
@@ -62,14 +67,13 @@ public class levels extends JComponent implements KeyListener{
         
         // GAME DRAWING GOES HERE 
         g.setColor(Color.GREEN);
-        g.fillRect(base1.x, base1.y, base1.width, base1.height);
-        g.fillRect(base2.x, base2.y, base2.width, base2.height);
+        g.fillRect(base1.x - camx, base1.y - camy, base1.width, base1.height);
+        g.fillRect(base2.x - camx, base2.y - camy, base2.width, base2.height);
         g.fillRect(player.x - camx, player.y - camy, player.height, player.width);
-        
-        
-         Rectangle[] recrace1 = { new Rectangle (), new Rectangle ()};
-        
-        
+
+        for (int i = 0; i < recrace1.length; i++) {
+            g.fillRect(recrace1[i].x - camx, recrace1[i].y - camy, recrace1[i].width, recrace1[i].height);
+        }
         
         // GAME DRAWING ENDS HERE
     }
