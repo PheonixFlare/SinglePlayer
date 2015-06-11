@@ -36,26 +36,20 @@ public class levels extends JComponent implements KeyListener{
     boolean down = false;
     boolean right = false;
     boolean left = false;
-    int speed = 5;
+    int speed = 15;
     int camx = 0;
     int camy = 0;
-    
-    Rectangle base1 = new Rectangle(0, 580, 3200, 40);
-    Rectangle base2 = new Rectangle(0, 270, 3200, 20);
-    
-    
-    Rectangle player = new Rectangle(20, 550, 30, 30);
+    Rectangle base1 = new Rectangle(0, 290, 3200, 10);
+    Rectangle base2 = new Rectangle(0, 590, 3200, 10);
     
     
-    Rectangle[] recrace1 = { new Rectangle (200, 505, 40, 75), new Rectangle (500, 480, 50, 100),new Rectangle (750, 530, 20, 50),new Rectangle (900, 400, 500, 180), new Rectangle (850, 540, 50, 40), new Rectangle(1000, 350, 50, 50),new Rectangle (1150, 330, 30, 100),new Rectangle (1300, 350, 50, 50),new Rectangle (0, 0, 0, 0),
-    new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),
+    Rectangle player = new Rectangle(20, 560, 30, 30);
+    
+    
+    Rectangle[] recrace1 = { new Rectangle (275, 490, 50, 100), new Rectangle (500, 520, 30, 70),new Rectangle (700, 550, 40, 40),new Rectangle (740, 510, 40, 80), new Rectangle (780, 470, 40, 120), new Rectangle(820, 430, 40, 160),new Rectangle (860, 430, 350, 160),new Rectangle (920, 370, 30, 60),new Rectangle (1100, 360, 50, 70),
+    new Rectangle (1470, 510, 240, 20),new Rectangle (1670, 530, 40, 60),new Rectangle (1820, 480, 75, 20),new Rectangle (1990, 460, 75, 20),new Rectangle (2160, 440, 75, 20),new Rectangle (2320, 420, 400, 20),new Rectangle (2100, 530, 40, 60),new Rectangle (2350, 540, 50, 50),new Rectangle (2575, 540, 40, 50),new Rectangle (2800, 500, 20, 90),
     new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),};
-
-    //base 1: 0, 580, 3200, 40 base 1: 0, 580, 3200, 40 base 1: 0, 580, 3200, 40 base 1: 0, 580, 3200, 40 base 1: 0, 580, 3200, 40 base 1: 0, 580, 3200, 40 base 1: 0, 580, 3200, 40 base 1: 0, 580, 3200, 40 base 1: 0, 580, 3200, 40 base 1: 0, 580, 3200, 40 
-    //base 2: 0, 270, 3200, 40 base 2: 0, 270, 3200, 40 base 2: 0, 270, 3200, 40 base 2: 0, 270, 3200, 40 base 2: 0, 270, 3200, 40 base 2: 0, 270, 3200, 40 base 2: 0, 270, 3200, 40 base 2: 0, 270, 3200, 40 base 2: 0, 270, 3200, 40 base 2: 0, 270, 3200, 40
     
-    
-
     // drawing of the game happens in here
     // we use the Graphics object, g, to perform the drawing
     // NOTE: This is already double buffered!(helps with framerate/speed)
