@@ -46,10 +46,15 @@ public class levels extends JComponent implements KeyListener{
     Rectangle player = new Rectangle(20, 560, 30, 30);
     
     
-    Rectangle[] recrace1 = { new Rectangle (275, 490, 50, 100), new Rectangle (500, 520, 30, 70),new Rectangle (700, 550, 40, 40),new Rectangle (740, 510, 40, 80), new Rectangle (780, 470, 40, 120), new Rectangle(820, 430, 40, 160),new Rectangle (860, 430, 350, 160),new Rectangle (920, 370, 30, 60),new Rectangle (1100, 360, 50, 70),
-    new Rectangle (1470, 510, 240, 20),new Rectangle (1670, 530, 40, 60),new Rectangle (1820, 480, 75, 20),new Rectangle (1990, 460, 75, 20),new Rectangle (2160, 440, 75, 20),new Rectangle (2320, 420, 400, 20),new Rectangle (2100, 530, 40, 60),new Rectangle (2350, 540, 50, 50),new Rectangle (2575, 540, 40, 50),new Rectangle (2800, 500, 20, 90),
-    new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),};
+    Rectangle[] recrace1 = { new Rectangle (300, 500, 50, 90), new Rectangle (600, 460, 40, 150),new Rectangle (600, 390, 40, - 100 ),new Rectangle (825, 560, 250, 40), new Rectangle (1100, 400, 100, 20), new Rectangle(1275, 380, 75, 20),new Rectangle (1400, 370, 75, 20),new Rectangle (1525, 380, 75, 20),new Rectangle (1650, 400, 75, 20),
+    new Rectangle (1150, 560, 30, 30),new Rectangle (1300, 540, 30, 50),new Rectangle (1450, 560, 30, 30),new Rectangle (1600, 550, 30, 40),new Rectangle (1750, 550, 30, 40),new Rectangle (2000, 460, 40, 150),new Rectangle (2000, 390, 40, - 100),new Rectangle (2200, 550, 40, 40),new Rectangle (2240, 510, 40, 80),new Rectangle (2280, 470, 40, 120),
+    new Rectangle (2320, 430, 40, 160),new Rectangle (2360, 390, 200, 200),new Rectangle (2430, 350, 40, 70),new Rectangle (2700, 500, 50, 90),new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),};
     
+    
+//    Rectangle[] recrace1 = { new Rectangle (0, 0, 0, 0), new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0), new Rectangle (0, 0, 0, 120), new Rectangle(0, 0, 0, 0),new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),
+//    new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),
+//    new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),};
+//  
     // drawing of the game happens in here
     // we use the Graphics object, g, to perform the drawing
     // NOTE: This is already double buffered!(helps with framerate/speed)
@@ -118,6 +123,7 @@ public class levels extends JComponent implements KeyListener{
             if (player.x <= 0){
                 player.x = 0;
             }
+            
             // GAME LOGIC ENDS HERE 
             
             // update the drawing (calls paintComponent)
