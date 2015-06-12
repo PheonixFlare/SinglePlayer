@@ -87,7 +87,8 @@ public class Terp extends JComponent implements KeyListener {
     int gravity = 2;
     boolean sjumpEnd = false;
     int speedlvl1 = 4;
-    int speed = 5;
+    int p1speed = 5;
+    int p2speed = 5;
     int speed2 = 4;
     int camx = 0;
     int camy = 0;
@@ -106,6 +107,9 @@ public class Terp extends JComponent implements KeyListener {
     //race mode variables
     int p1diff = 0;
     int p2diff = 0;
+    boolean powerupgetp1 = false;
+    boolean powerupgetp2 = false;
+    boolean powerupshow = true;
     //player 1 controls
     boolean p1jump = false;
     boolean p1left = false;
@@ -169,7 +173,8 @@ public class Terp extends JComponent implements KeyListener {
     new Rectangle (2320, 430, 40, 160),new Rectangle (2360, 390, 200, 200),new Rectangle (2430, 350, 40, 70),new Rectangle (2700, 500, 50, 90),new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),};
     Rectangle[] recrace2b;
     
-    Rectangle pup1 = new Rectangle (1550, 545, 40, 40);
+    Rectangle pup1 = new Rectangle (1550, 540, 40, 40);
+    int pupspeed = 1;
     
     //dialog boxes
     Object[] modeSelect = {"Single Player", "Co-Op", "Race Mode", "How To Play"};
@@ -433,7 +438,7 @@ public class Terp extends JComponent implements KeyListener {
                 p1dy = p1dy + gravity;
 
                 if (p1right && !p1inAirs) {//player 1 move right as long as he/she is not sjumping
-                    player1.x = player1.x + speed;
+                    player1.x = player1.x + p1speed;
 //                  for (Rectangle rect: allRectangles)
 //                {
 //                      if (player1.intersects(rect))
@@ -448,7 +453,7 @@ public class Terp extends JComponent implements KeyListener {
 //                        }                   
                 }
                 if (p1left && !p1inAirs) {//player 1 move left as long as he/she is not sjumping
-                    player1.x = player1.x - speed;
+                    player1.x = player1.x - p1speed;
 //                  for (Rectangle rect: allRectangles)
 //                {
 //                      if (player1.intersects(rect))
@@ -622,16 +627,16 @@ public class Terp extends JComponent implements KeyListener {
                 p2dy = p2dy + gravity;
 
                 if (p1right) {//player 1 move right
-                    player1.x = player1.x + speed;
+                    player1.x = player1.x + p1speed;
                 }
                 if (p2right) {//player 2 move right
-                    player2.x = player2.x + speed;
+                    player2.x = player2.x + p2speed;
                 }
                 if (p1left) {//player 1 move left
-                    player1.x = player1.x - speed;
+                    player1.x = player1.x - p1speed;
                 }
                 if (p2left) {//player 2 move left
-                    player2.x = player2.x - speed;
+                    player2.x = player2.x - p2speed;
                 }
                 
                 if (p2jump && !p2inAir){
@@ -670,7 +675,21 @@ public class Terp extends JComponent implements KeyListener {
                 if (player2.x <= 0){
                     player2.x = 0;
                 }
-                        
+                if (player2.intersects(pup1) && powerupshow == true){
+                    powerupgetp1 = true;
+                    powerupshow = false;
+                    p1speed = 6;
+                }
+                if (player2.intersects(pup1) && powerupshow == true){
+                    powerupgetp2 = true;
+                    p2speed = 6;
+                }
+                if (p1speed == 6 && player1.x >= 2000){
+                    p1speed = 5;
+                }
+                if (p2speed == 5 && player2.x >= 2000){
+                    p2speed = 5;
+                }
                 
 
                 if (player1.x < WIDTH / 2) {
@@ -683,6 +702,15 @@ public class Terp extends JComponent implements KeyListener {
                     camx3 = 0;
                 } else {
                     camx3 = player2.x - WIDTH / 2;
+                }
+                if (screen == 13){
+                    if(pup1.y <= 530){
+                        pupspeed *= -1;
+                    } 
+                    if (pup1.y >= 550){
+                        pupspeed *= -1;
+                    }
+                    pup1.y = pup1.y + pupspeed;
                 }
                 
                 
@@ -1018,7 +1046,9 @@ public class Terp extends JComponent implements KeyListener {
         g.setColor(Color.RED);
         g.drawImage(finish, 2800 - camx, 490, null);
         g.drawImage(finish, 2800 - camx3, 190, null);
-        g.drawImage(powerup, pup1.x - camx, pup1.y, null);
+        if (powerupshow == true){
+            g.drawImage(powerup, pup1.x - camx, pup1.y, null);
+        }
         
     }
     void drawRL2(Graphics g) {// this method draws race level 1
