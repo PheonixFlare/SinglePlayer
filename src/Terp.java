@@ -110,6 +110,7 @@ public class Terp extends JComponent implements KeyListener {
     boolean powerupgetp1 = false;
     boolean powerupgetp2 = false;
     boolean powerupshow = true;
+    int pupspeed2;
     //player 1 controls
     boolean p1jump = false;
     boolean p1left = false;
@@ -169,11 +170,12 @@ public class Terp extends JComponent implements KeyListener {
     Rectangle[] recrace1b;
     
     Rectangle[] recrace2 = { new Rectangle (300, 500, 50, 90), new Rectangle (600, 460, 40, 150),new Rectangle (600, 390, 40, - 100 ),new Rectangle (825, 560, 250, 40), new Rectangle (1100, 400, 100, 20), new Rectangle(1275, 380, 75, 20),new Rectangle (1400, 370, 75, 20),new Rectangle (1525, 380, 75, 20),new Rectangle (1650, 400, 75, 20),
-    new Rectangle (1150, 560, 30, 30),new Rectangle (1300, 540, 30, 50),new Rectangle (1450, 560, 30, 30),new Rectangle (1600, 550, 30, 40),new Rectangle (1750, 550, 30, 40),new Rectangle (2000, 460, 40, 150),new Rectangle (2000, 390, 40, - 100),new Rectangle (2200, 550, 40, 40),new Rectangle (2240, 510, 40, 80),new Rectangle (2280, 470, 40, 120),
+    new Rectangle (1150, 540, 30, 50),new Rectangle (1300, 540, 30, 50),new Rectangle (1450, 550, 30, 40),new Rectangle (1600, 550, 30, 40),new Rectangle (1750, 550, 30, 40),new Rectangle (2000, 460, 40, 150),new Rectangle (2000, 390, 40, - 100),new Rectangle (2200, 550, 40, 40),new Rectangle (2240, 510, 40, 80),new Rectangle (2280, 470, 40, 120),
     new Rectangle (2320, 430, 40, 160),new Rectangle (2360, 390, 200, 200),new Rectangle (2430, 350, 40, 70),new Rectangle (2700, 500, 50, 90),new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),};
     Rectangle[] recrace2b;
     
     Rectangle pup1 = new Rectangle (1550, 540, 40, 40);
+    Rectangle pup2 = new Rectangle (1550, 240, 40, 40);
     int pupspeed = 1;
     
     //dialog boxes
@@ -608,21 +610,6 @@ public class Terp extends JComponent implements KeyListener {
                 
                 p2diff = player2.x - player1.x;
                 
-                if(p1diff >= 415 || player1.x == 2800 ){
-                    player1.x = 20;
-                    player1.y = 560;
-                    player2.x = 20;
-                    player2.y = 260;
-                    screen = 15;
-                }
-                if(p2diff >= 415 || player2.x == 2800){
-                    player1.x = 20;
-                    player1.y = 560;
-                    player2.x = 20;
-                    player2.y = 260;
-                    screen = 16;
-                }
-                
                 p1dy = p1dy + gravity;
                 p2dy = p2dy + gravity;
 
@@ -675,20 +662,25 @@ public class Terp extends JComponent implements KeyListener {
                 if (player2.x <= 0){
                     player2.x = 0;
                 }
-                if (player2.intersects(pup1) && powerupshow == true){
+                if (player1.intersects(pup1) && powerupshow == true){
                     powerupgetp1 = true;
                     powerupshow = false;
-                    p1speed = 6;
+                    p1speed = 7;
                 }
-                if (player2.intersects(pup1) && powerupshow == true){
+                if (player2.intersects(pup2) && powerupshow == true){
                     powerupgetp2 = true;
-                    p2speed = 6;
+                    powerupshow = false;
+                    p2speed = 7;
                 }
-                if (p1speed == 6 && player1.x >= 2000){
+                if (p1speed == 7 && player1.x >= 2000){
                     p1speed = 5;
+                    powerupgetp1 = false;
+                    powerupshow = true;
                 }
-                if (p2speed == 5 && player2.x >= 2000){
+                if (p2speed == 7 && player2.x >= 2000){
                     p2speed = 5;
+                    powerupgetp2 = false;
+                    powerupshow = true;
                 }
                 
 
@@ -711,6 +703,29 @@ public class Terp extends JComponent implements KeyListener {
                         pupspeed *= -1;
                     }
                     pup1.y = pup1.y + pupspeed;
+                }
+                 if (screen == 13){
+                    if(pup2.y <= 230){
+                        pupspeed2 *= -1;
+                    } 
+                    if (pup2.y >= 250){
+                        pupspeed2 *= -1;
+                    }
+                    pup2.y = pup2.y + pupspeed;
+                }
+                if(p1diff >= 415 || player1.x == 2800 ){
+                    player1.x = 20;
+                    player1.y = 560;
+                    player2.x = 20;
+                    player2.y = 260;
+                    screen = 15;
+                }
+                if(p2diff >= 415 || player2.x == 2800){
+                    player1.x = 20;
+                    player1.y = 560;
+                    player2.x = 20;
+                    player2.y = 260;
+                    screen = 16;
                 }
                 
                 
@@ -1048,6 +1063,9 @@ public class Terp extends JComponent implements KeyListener {
         g.drawImage(finish, 2800 - camx3, 190, null);
         if (powerupshow == true){
             g.drawImage(powerup, pup1.x - camx, pup1.y, null);
+        }
+         if (powerupshow == true){
+            g.drawImage(powerup, pup2.x - camx3, pup2.y, null);
         }
         
     }
