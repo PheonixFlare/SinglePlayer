@@ -74,6 +74,7 @@ public class Terp extends JComponent implements KeyListener {
     BufferedImage slose = ImageHelper.loadImage("slose.png");
     BufferedImage hint = ImageHelper.loadImage("hintnew.png");
     BufferedImage congrats = ImageHelper.loadImage("tutorial.png");
+    BufferedImage powerup = ImageHelper.loadImage("powerup.png");
     int screen = MAIN;
     boolean change = false;
     //players
@@ -159,12 +160,16 @@ public class Terp extends JComponent implements KeyListener {
     Rectangle top = new Rectangle (10,-10,3200,10);
     Rectangle r1p1collide = new Rectangle (0, 200, 3200, 100);
     Rectangle r2p1collide = new Rectangle (0, 200, 3200, 100);
+    Rectangle r1p2collide = new Rectangle (0, -50, 3200, 50);
+    Rectangle r2p2collide = new Rectangle (0, -50, 3200, 50);
     Rectangle[] recrace1b;
     
     Rectangle[] recrace2 = { new Rectangle (300, 500, 50, 90), new Rectangle (600, 460, 40, 150),new Rectangle (600, 390, 40, - 100 ),new Rectangle (825, 560, 250, 40), new Rectangle (1100, 400, 100, 20), new Rectangle(1275, 380, 75, 20),new Rectangle (1400, 370, 75, 20),new Rectangle (1525, 380, 75, 20),new Rectangle (1650, 400, 75, 20),
     new Rectangle (1150, 560, 30, 30),new Rectangle (1300, 540, 30, 50),new Rectangle (1450, 560, 30, 30),new Rectangle (1600, 550, 30, 40),new Rectangle (1750, 550, 30, 40),new Rectangle (2000, 460, 40, 150),new Rectangle (2000, 390, 40, - 100),new Rectangle (2200, 550, 40, 40),new Rectangle (2240, 510, 40, 80),new Rectangle (2280, 470, 40, 120),
     new Rectangle (2320, 430, 40, 160),new Rectangle (2360, 390, 200, 200),new Rectangle (2430, 350, 40, 70),new Rectangle (2700, 500, 50, 90),new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),new Rectangle (0, 0, 0, 0),};
     Rectangle[] recrace2b;
+    
+    Rectangle pup1 = new Rectangle (1550, 545, 40, 40);
     
     //dialog boxes
     Object[] modeSelect = {"Single Player", "Co-Op", "Race Mode", "How To Play"};
@@ -680,9 +685,7 @@ public class Terp extends JComponent implements KeyListener {
                     camx3 = player2.x - WIDTH / 2;
                 }
                 
-                if (player2.y <= 0){
-                    player2.y = 0;
-                }
+                
                 
                 
                 
@@ -726,6 +729,10 @@ public class Terp extends JComponent implements KeyListener {
                         handleCollision2(player2, base2);
 
                     }
+                    if (player2.intersects(r1p2collide)) {// this if statment handles a collision with an extra block in level 4
+                        handleCollision2(player2, r1p2collide);
+
+                    }
                 }
                 
                 
@@ -763,6 +770,10 @@ public class Terp extends JComponent implements KeyListener {
                     }
                     if (player2.intersects(base2)) {// this if statment handles a collision with an extra block in level 4
                         handleCollision2(player2, base2);
+
+                    }
+                    if (player2.intersects(r2p2collide)) {// this if statment handles a collision with an extra block in level 4
+                        handleCollision2(player2, r2p2collide);
 
                     }
                 }
@@ -1007,6 +1018,8 @@ public class Terp extends JComponent implements KeyListener {
         g.setColor(Color.RED);
         g.drawImage(finish, 2800 - camx, 490, null);
         g.drawImage(finish, 2800 - camx3, 190, null);
+        g.drawImage(powerup, pup1.x - camx, pup1.y, null);
+        
     }
     void drawRL2(Graphics g) {// this method draws race level 1
         
@@ -1036,5 +1049,6 @@ public class Terp extends JComponent implements KeyListener {
         g.setColor(Color.RED);
         g.drawImage(finish, 2800 - camx, 490, null);
         g.drawImage(finish, 2800 - camx3, 190, null);
+        
     }
 }
