@@ -714,6 +714,8 @@ public class Terp extends JComponent implements KeyListener {
                     pup2.y = pup2.y + pupspeed;
                 }
                 if(p1diff >= 415 || player1.x == 2800 ){
+                    p1speed = 5;
+                    p2speed = 5;
                     player1.x = 20;
                     player1.y = 560;
                     player2.x = 20;
@@ -721,6 +723,8 @@ public class Terp extends JComponent implements KeyListener {
                     screen = 15;
                 }
                 if(p2diff >= 415 || player2.x == 2800){
+                    p1speed = 5;
+                    p2speed = 5;
                     player1.x = 20;
                     player1.y = 560;
                     player2.x = 20;
