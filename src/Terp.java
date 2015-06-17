@@ -705,7 +705,7 @@ public class Terp extends JComponent implements KeyListener {
                     pup1.y = pup1.y + pupspeed;
                 }
                  if (screen == 13){
-                    if(pup2.y <= 230){
+                    if(pup2.y <= 230){  
                         pupspeed2 *= -1;
                     } 
                     if (pup2.y >= 250){
